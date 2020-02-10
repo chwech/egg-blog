@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "eslint-config-egg",
+    "@chwech/eslint-config"
+  ],
+  "rules": {
+    "valid-jsdoc": ["error", { "requireReturn": false }],
+    "no-import-assign": ["off"]
+  }
+}
