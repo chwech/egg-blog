@@ -4,9 +4,36 @@ const Controller = require('egg').Controller
 
 class HomeController extends Controller {
   async index() {
+    const ctx = this.ctx
+
+    ctx.body = `
+      <div>
+        <h2>${ctx.path}</h2>
+        <a href="/admin">admin</a>
+      </div>
+    `
+  }
+
+  async admin() {
     const { ctx } = this
 
-    ctx.body = 'hi, egg'
+    console.log(ctx.isAuthenticated())
+    if (ctx.isAuthenticated()) {
+
+      // show user info
+    } else {
+
+      // redirect to origin url by ctx.session.returnTo
+      ctx.session.returnTo = ctx.path
+      await ctx.render('login.html')
+    }
+  }
+
+  async logout() {
+    const ctx = this.ctx
+
+    ctx.logout()
+    ctx.redirect(ctx.get('referer') || '/')
   }
 }
 

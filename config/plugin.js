@@ -7,4 +7,17 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
+  passport: {
+    enable: true,
+    package: 'egg-passport',
+  },
+  passportLocal: {
+    enable: true,
+    package: 'egg-passport-local',
+  },
+
+  mysql: {
+    enable: true,
+    package: 'egg-mysql',
+  }
 }
