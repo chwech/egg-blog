@@ -1,6 +1,6 @@
-'use strict'
+"use strict"
 
-const Controller = require('egg').Controller
+const Controller = require("egg").Controller
 
 class HomeController extends Controller {
   async index() {
@@ -25,7 +25,7 @@ class HomeController extends Controller {
 
       // redirect to origin url by ctx.session.returnTo
       ctx.session.returnTo = ctx.path
-      await ctx.render('login.html')
+      await ctx.render("login.html")
     }
   }
 
@@ -33,7 +33,7 @@ class HomeController extends Controller {
     const ctx = this.ctx
 
     ctx.logout()
-    ctx.redirect(ctx.get('referer') || '/')
+    ctx.redirect(ctx.get("referer") || "/")
   }
 }
 
