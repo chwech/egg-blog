@@ -1,5 +1,6 @@
 'use strict'
 
+// eslint-disable-next-line valid-jsdoc
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -23,6 +24,13 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   }
 
+  // 配置模板引擎
+  config.view = {
+    mapping: { 
+      '.html': 'nunjucks' // 指定 .html 后缀的文件使用 Nunjucks 进行渲染。
+    }
+  }
+  
   return {
     ...config,
     ...userConfig,

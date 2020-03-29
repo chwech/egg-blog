@@ -6,12 +6,14 @@ class HomeController extends Controller {
   async index() {
     const ctx = this.ctx
 
-    ctx.body = `
-      <div>
-        <h2>${ctx.path}</h2>
-        <a href="/admin">admin</a>
-      </div>
-    `
+    // console.log(this.app.config.env)
+
+
+    const userInfo = await ctx.service.user.find()
+    
+    ctx.body = userInfo
+
+    // await ctx.render('index.html')
   }
 
   async admin() {
