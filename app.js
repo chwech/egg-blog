@@ -9,9 +9,6 @@ function initPassport(app) {
   app.passport.use(new LocalStrategy({
     passReqToCallback: true,
   }, (req, username, password, done) => {
-    console.log(req)
-    console.log(username)
-    console.log(password)
 
     // format user
     const user = {
@@ -24,14 +21,30 @@ function initPassport(app) {
   }))
 
   // 处理用户信息
+
+  // 校验用户
   // eslint-disable-next-line no-unused-vars
-  app.passport.verify(async (ctx, user) => {}) // 校验用户
+  app.passport.verify(async (ctx, user) => {
+    ctx.logger.info('校验用户', user)
+
+    return user
+  })
   
+  // 序列化用户信息后存储进 session
   // eslint-disable-next-line no-unused-vars
-  app.passport.serializeUser(async (ctx, user) => {}) // 序列化用户信息后存储进 session
+  app.passport.serializeUser(async (ctx, user) => {
+    ctx.logger.info('序列化用户信息后存进session', user)
+    return user
+  })
   
+  // 反序列化后取出用户信息
   // eslint-disable-next-line no-unused-vars
-  app.passport.deserializeUser(async (ctx, user) => {}) // 反序列化后取出用户信息
+  app.passport.deserializeUser(async (ctx, user) => {
+    ctx.logger.info('反序列化后取出用户信息', user)
+    user.me = 'chwech'
+
+    return user
+  })
 }
 
 class AppBootHook {

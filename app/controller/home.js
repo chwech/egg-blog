@@ -34,7 +34,7 @@ class HomeController extends Controller {
     const ctx = this.ctx
 
     ctx.logout()
-    ctx.redirect(ctx.get("referer") || "/")
+    ctx.redirect(ctx.get("referer") || "/login")
   }
 }
 
