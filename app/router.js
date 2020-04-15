@@ -6,8 +6,12 @@
 module.exports = app => {
   app.router.get('/', app.controller.home.index)
   app.router.get('/admin', 'home.admin')
+  
+  app.router.get('/login', 'home.login')
 
-  const localStrategy = app.passport.authenticate('local')
-
-  app.router.post('/passport/local', localStrategy)
+  // 登录校验
+  app.router.post('/login', app.passport.authenticate('local', {
+    failureRedirect: '/login',
+    successRedirect: '/' 
+  }))
 }

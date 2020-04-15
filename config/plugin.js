@@ -7,6 +7,8 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
+  
+  // 鉴权
   passport: {
     enable: true,
     package: 'egg-passport',
@@ -26,5 +28,6 @@ module.exports = {
   nunjucks: {
     enable: true,
     package: 'egg-view-nunjucks'
-  }
+  },
+
 }
