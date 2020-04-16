@@ -8,7 +8,8 @@ module.exports = app => {
 
   // 登录校验
   app.router.post('/user/login', app.controller.user.login)
-  app.router.get('/user/logout', app.controller.user.logout)
+  app.router.post('/user/logout', app.controller.user.logout)
 
+  // 获取用户信息
   app.router.get('/user/info', app.jwt, app.controller.user.info)
 }

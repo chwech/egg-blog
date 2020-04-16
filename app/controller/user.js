@@ -31,8 +31,10 @@ class UserController extends Controller {
   async logout() {
     const ctx = this.ctx
 
-    ctx.logout()
-    ctx.redirect(ctx.get("referer") || "/login")
+    ctx.body = {
+      code: 20000,
+      message: '退出登录成功'
+    }
   }
 
   async info() {
