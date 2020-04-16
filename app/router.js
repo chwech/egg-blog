@@ -14,8 +14,5 @@ module.exports = app => {
 
 
   // 登录校验
-  app.router.post('/login', app.passport.authenticate('local', {
-    failureRedirect: '/login',
-    successRedirect: '/' 
-  }))
+  app.router.post('/login', app.controller.user.login)
 }

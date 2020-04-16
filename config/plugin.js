@@ -14,7 +14,7 @@ module.exports = {
     package: 'egg-passport',
   },
   passportLocal: {
-    enable: true,
+    enable: false,
     package: 'egg-passport-local',
   },
 

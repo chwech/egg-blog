@@ -12,7 +12,9 @@ class HomeController extends Controller {
   async login() {
     const ctx = this.ctx
 
-    await ctx.render('login.html')
+    ctx.logger.info('登录成功')
+
+    // await ctx.render('login.html')
   }
 
   async admin() {

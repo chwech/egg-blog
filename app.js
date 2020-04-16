@@ -66,7 +66,7 @@ class AppBootHook {
     // 可以做一些数据初始化等操作，这些操作成功才会启动应用
 
     // 挂载 strategy
-    initPassport(this.app)
+    // initPassport(this.app)
   }
 }
 

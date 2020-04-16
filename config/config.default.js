@@ -30,7 +30,12 @@ module.exports = appInfo => {
       '.html': 'nunjucks' // 指定 .html 后缀的文件使用 Nunjucks 进行渲染。
     }
   }
+
   
+  config.security = {
+    csrf: false // 开发时关闭，上线请打开
+  }
+
   return {
     ...config,
     ...userConfig,
