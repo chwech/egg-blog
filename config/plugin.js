@@ -17,6 +17,10 @@ module.exports = {
     enable: false,
     package: 'egg-passport-local',
   },
+  jwt: {
+    enable: true,
+    package: "egg-jwt"
+  },
 
   // 启用egg-mysql插件访问mysql数据库
   mysql: {

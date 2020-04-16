@@ -36,6 +36,10 @@ module.exports = appInfo => {
     csrf: false // 开发时关闭，上线请打开
   }
 
+  config.jwt = {
+    secret: "123456"
+  }
+
   return {
     ...config,
     ...userConfig,
