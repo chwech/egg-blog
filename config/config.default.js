@@ -37,7 +37,7 @@ module.exports = appInfo => {
   }
 
   config.jwt = {
-    secret: "123456"
+    secret: "chwech-egg-blog-jwt-secret" // 密钥，对jwt header和payload部分签名用
   }
 
   return {

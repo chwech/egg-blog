@@ -12,4 +12,7 @@ module.exports = app => {
 
   // 获取用户信息
   app.router.get('/user/info', app.jwt, app.controller.user.info)
+
+  // 文章
+  app.router.resources('post', '/post', app.controller.post)
 }

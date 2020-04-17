@@ -7,23 +7,43 @@ class UserController extends Controller {
     const ctx = this.ctx
     const { app } = this.ctx
     const body = ctx.request.body
+    const username = body.username
+    const password = body.password
 
-    ctx.logger.info(body)
-    if (body.username === 'admin' && body.password === '111111') {
-      ctx.logger.info('登录成功')
-      const token = app.jwt.sign({ foo: 'bar' }, app.config.jwt.secret)
+    // 校验参数
+    ctx.validate({
+      username: { type: 'string', require: true },
+      password: { type: 'string', require: true }
+    })
 
-      ctx.body = {
-        code: 20000,
-        message: '登录成功',
-        data: {
-          token: token
+    // 调用服务（service）
+    const userInfo = await ctx.service.user.find(username)
+
+    if (userInfo) {
+      ctx.logger.info(userInfo.user_pass)
+
+      // TODO: 密码要加密
+      if (password === userInfo.user_pass) {
+        ctx.logger.info('登录成功')
+        const token = app.jwt.sign({ username: username }, app.config.jwt.secret)
+  
+        ctx.body = {
+          code: 20000,
+          message: '登录成功',
+          data: {
+            token: token
+          }
+        }
+      } else {
+        ctx.body = {
+          code: 40001,
+          message: '密码错误'
         }
       }
     } else {
       ctx.body = {
         code: 40001,
-        message: '账号或密码错误'
+        message: '该用户未注册'
       }
     }
   }

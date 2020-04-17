@@ -17,6 +17,7 @@ module.exports = {
     enable: false,
     package: 'egg-passport-local',
   },
+
   jwt: {
     enable: true,
     package: "egg-jwt"
@@ -34,4 +35,9 @@ module.exports = {
     package: 'egg-view-nunjucks'
   },
 
+  // 校验参数插件
+  validate: {
+    enable: true,
+    package: 'egg-validate',
+  }
 }
