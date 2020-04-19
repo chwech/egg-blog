@@ -5,6 +5,8 @@
   ],
   "rules": {
     "valid-jsdoc": ["error", { "requireReturn": false }],
-    "no-import-assign": ["off"]
+    "no-import-assign": ["off"],
+    // TODO: 研究一下再开启
+    "linebreak-style": ["off"]
   }
 }

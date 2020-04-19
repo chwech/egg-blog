@@ -66,8 +66,8 @@ class UserController extends Controller {
     this.ctx.body = {
       code: 20000,
       data: {
-        roles: ['admin'],
-        introduction: 'I am a super administrator',
+        roles: [userInfo.roles],
+        introduction: userInfo.user_introduction,
         avatar: userInfo.user_url,
         name: userInfo.user_nicename
       }
