@@ -10,7 +10,10 @@ class PostController extends Controller {
 
     ctx.body = {
       code: 20000,
-      data: posts
+      data: {
+        items: posts,
+        total: 2
+      }
     }
   }
 }

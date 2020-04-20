@@ -6,7 +6,7 @@ class PostService extends Service {
   async getList() {
     // eslint-disable-next-line max-len
     const posts = await this.app.mysql.select('wp_posts', {
-      limit: 2
+      limit: 20
     })
 
     return posts
