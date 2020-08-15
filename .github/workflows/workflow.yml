@@ -23,7 +23,7 @@ jobs:
       - run: tar -zcvf ./dist/release.tgz .
 
       # 列出文件
-      - run: ls
+      - run: ls dist
 
       # ftp
       - uses: SamKirkland/FTP-Deploy-Action@3.1.1
