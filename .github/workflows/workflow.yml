@@ -22,6 +22,7 @@ jobs:
       - run: ls
 
       # 打包成 tgz 文件
+      - run: mkdir dist
       - run: tar -zcvf ./dist/release.tgz .
 
       # ftp
