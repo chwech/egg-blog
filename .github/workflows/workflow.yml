@@ -32,4 +32,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: | 
             ls
-            whoami
+            cd /home/chwech-ftp/chwech-ftp/egg-blog-admin
+            docker-compose up -d
