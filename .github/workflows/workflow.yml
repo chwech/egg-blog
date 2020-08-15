@@ -21,3 +21,15 @@ jobs:
           ftp-server: ftp://207.148.124.80:21/chwech-ftp/egg-blog-admin
           ftp-username: chwech-ftp
           ftp-password: ${{ secrets.CHWECH_FTP }}
+
+      # 连接服务器
+      - name: ssh server and run script
+        uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            port: ${{ secrets.PORT }}
+            script: | 
+              ls
+              whoami
