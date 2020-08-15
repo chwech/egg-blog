@@ -7,4 +7,6 @@ services:
       - ./:/home/node/app
     expose:
       - "7001"
-    command: "npm start"
+    command: 
+      - "npm install"
+      - "npm start"
