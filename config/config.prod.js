@@ -7,7 +7,7 @@ exports.mysql = {
   client: {
 
     // host
-    host: 'mysql',
+    host: 'localhost',
 
     // 端口号
     port: '3306',
