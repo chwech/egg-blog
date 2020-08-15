@@ -20,10 +20,10 @@ jobs:
 
       # 打包成 tgz 文件
       - run: mkdir dist
-      - run: tar -zcvf ./dist/release.tgz .
+      - run: tar -zcf ./dist/release.tgz .
 
       # 列出文件
-      - run: ls dist
+      - run: ls -l dist
 
       # ftp
       - uses: SamKirkland/FTP-Deploy-Action@3.1.1
@@ -45,5 +45,5 @@ jobs:
           script: |
             cd /home/chwech-ftp/chwech-ftp/egg-blog-admin
             ls
-            tar -zxvf release.tgz
-            npm start
+            tar -zxf release.tgz
+            docker-compose up -d

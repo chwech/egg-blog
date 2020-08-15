@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  node:
+    image: "node:8.12.0"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - "7001"
+    command: "npm start"
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - "/home/chwech/mysql-data/egg-blog-admin:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin_chwech
+      MYSQL_DATABASE: wordpress
