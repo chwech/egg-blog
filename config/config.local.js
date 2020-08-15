@@ -16,7 +16,7 @@ exports.mysql = {
     user: 'root',
 
     // 密码
-    password: 'admin',
+    password: 'admin_chwech',
 
     // 数据库名
     database: 'wordpress',

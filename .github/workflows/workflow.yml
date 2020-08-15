@@ -1,0 +1,23 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      # 检出代码
+      - uses: actions/checkout@v2
+
+      # 列出文件
+      - run: ls
+
+      # ftp
+      - uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        with:
+          ftp-server: ftp://207.148.124.80:21/chwech-ftp/egg-blog-admin
+          ftp-username: chwech-ftp
+          ftp-password: ${{ secrets.CHWECH_FTP }}
