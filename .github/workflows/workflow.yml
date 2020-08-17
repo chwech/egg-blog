@@ -28,9 +28,9 @@ jobs:
       # ftp
       - uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
-          ftp-server: ftp://207.148.124.80:21/chwech-ftp/egg-blog-admin
-          ftp-username: chwech-ftp
-          ftp-password: ${{ secrets.CHWECH_FTP }}
+          ftp-server: ${{ secrets.CHWECH_FTP_SERVER }}
+          ftp-username: ${{ secrets.CHWECH_FTP_USERNAME }}
+          ftp-password: ${{ secrets.CHWECH_FTP_PASSWORD }}
           local-dir: dist/
           
 
@@ -44,6 +44,8 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/chwech-ftp/chwech-ftp/egg-blog-admin
-            ls
             tar -zxf release.tgz
+            rm -f release.tgz
+            rm -rf dist
+            ls
             docker-compose up -d
