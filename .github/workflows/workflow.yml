@@ -48,4 +48,4 @@ jobs:
             rm -f release.tgz
             rm -rf dist
             ls
-            docker-compose up -d
+            docker-compose restart
