@@ -6,6 +6,7 @@ class PostController extends Controller {
   async index() {
     const ctx = this.ctx
 
+    ctx.logger.info('请求文章列表')
     let posts = await ctx.service.post.getList()
 
     ctx.body = {

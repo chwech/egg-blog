@@ -26,7 +26,7 @@ class UserController extends Controller {
       if (password === userInfo.user_pass) {
         ctx.logger.info('登录成功')
         const token = app.jwt.sign({ username: username }, app.config.jwt.secret)
-  
+        
         ctx.body = {
           code: 20000,
           message: '登录成功',

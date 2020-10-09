@@ -14,7 +14,7 @@ module.exports = app => {
   app.router.get('/user/info', app.jwt, app.controller.user.info)
 
   // 文章
-  app.router.resources('post', '/post', app.controller.post)
+  app.router.resources('post', '/post', app.jwt, app.controller.post)
 
   // 角色
   app.router.resources('role', '/role', app.controller.role)
