@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "*"
-          target: "/tmp"
+          target: "/home/chwech/docker/egg-blog"
 
       # 连接服务器
       - name: ssh server and run script
@@ -51,9 +51,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /tmp
-            tar -zxf -c /home/chwech/docker/egg-blog release.tgz
-            rm -f release.tgz
             cd /home/chwech/docker/egg-blog
-            ls
             docker-compose up -d
