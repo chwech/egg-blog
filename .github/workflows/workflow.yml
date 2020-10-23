@@ -19,11 +19,10 @@ jobs:
       - run: npm install --production
 
       # 打包成 tgz 文件
-      - run: mkdir dist
       - run: tar -zcf /tmp/release.tgz .
 
       # 列出文件
-      - run: ls -l dist
+      - run: ls -l /tmp
 
       # ftp
       # - uses: SamKirkland/FTP-Deploy-Action@3.1.1
@@ -42,6 +41,7 @@ jobs:
           port: ${{ secrets.PORT }}
           source: "/tmp/release.tgz"
           target: "/tmp"
+          tar_tmp_path: "/tmp"
 
       # 连接服务器
       - name: ssh server and run script
