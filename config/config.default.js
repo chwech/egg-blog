@@ -36,7 +36,8 @@ module.exports = appInfo => {
 
   
   config.security = {
-    csrf: false // 开发时关闭，上线请打开
+    csrf: false, // 开发时关闭，上线请打开
+    domainWhiteList: [ 'http://localhost:9527', 'http://www.chwech.com:3001' ],
   }
 
   config.jwt = {

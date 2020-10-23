@@ -39,5 +39,11 @@ module.exports = {
   validate: {
     enable: true,
     package: 'egg-validate',
+  },
+
+  // 跨域处理
+  cors: {
+    enable: true,
+    package: 'egg-cors',
   }
 }
