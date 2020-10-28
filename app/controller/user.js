@@ -6,9 +6,12 @@ class UserController extends Controller {
   async login() {
     const ctx = this.ctx
     const { app } = this.ctx
+
+    // 获取参数
     const body = ctx.request.body
     const username = body.username
     const password = body.password
+    console.log(body)
 
     // 校验参数
     ctx.validate({

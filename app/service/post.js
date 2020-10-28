@@ -11,6 +11,11 @@ class PostService extends Service {
 
     return posts
   }
+
+  async getCount () {
+    const count = await this.app.mysql.query('select count(*) as total from wp_posts')
+    return count
+  }
 }
 
 module.exports = PostService

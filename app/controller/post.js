@@ -7,13 +7,14 @@ class PostController extends Controller {
     const ctx = this.ctx
 
     ctx.logger.info('请求文章列表')
-    let posts = await ctx.service.post.getList()
+    const posts = await ctx.service.post.getList()
+    const [{ total }] = await ctx.service.post.getCount()
 
     ctx.body = {
       code: 20000,
       data: {
         items: posts,
-        total: 2
+        total: total
       }
     }
   }
