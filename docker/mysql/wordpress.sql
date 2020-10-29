@@ -20,6 +20,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for wp_commentmeta
 -- ----------------------------
+USE wordpress;
 DROP TABLE IF EXISTS `wp_commentmeta`;
 CREATE TABLE `wp_commentmeta`  (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
