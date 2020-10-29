@@ -20,7 +20,8 @@ services:
     restart: always
     volumes:
       - "/home/chwech/mysql-data/egg-blog-admin:/var/lib/mysql"
-      - "./docker/mysql:/docker-entrypoint-initdb.d"
+      - "./docker/mysql/init:/docker-entrypoint-initdb.d"
+      - "./docker/mysql/conf:/etc/mysql/conf.d"
     environment:
       MYSQL_ROOT_PASSWORD: admin_chwech
       MYSQL_DATABASE: wordpress
