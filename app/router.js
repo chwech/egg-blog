@@ -10,11 +10,18 @@ module.exports = app => {
   app.router.post('/user/login', app.controller.user.login)
   app.router.post('/user/logout', app.controller.user.logout)
 
+  // 七牛
+  app.router.get('/qiniu/token', app.jwt, app.controller.qiniu.getToken)
+
+
   // 获取用户信息
   app.router.get('/user/info', app.jwt, app.controller.user.info)
 
   // 文章
   app.router.resources('post', '/post', app.jwt, app.controller.post)
+
+  // 分类管理
+  app.router.resources('category', '/category', app.jwt, app.controller.category)
 
   // 角色
   app.router.resources('role', '/role', app.controller.role)
