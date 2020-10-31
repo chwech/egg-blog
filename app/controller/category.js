@@ -18,6 +18,12 @@ class CategoryController extends Controller {
     const ctx = this.ctx
     const body = ctx.request.body
 
+    // 参数校验
+    ctx.validate({
+      name: { type: 'string', required: true },
+      slug: { type: 'string', required: true },
+      parent: { type: 'number' }
+    })
     const result = await ctx.service.category.add(body)
 
     this.success(result)
