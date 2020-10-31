@@ -3,6 +3,7 @@
 // eslint-disable-next-line valid-jsdoc
 /**
  * @param {Egg.EggAppInfo} appInfo app info
+ * 所有环境会加载这个配置文件
  */
 module.exports = appInfo => {
 
@@ -24,7 +25,14 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
 
-    // myAppName: 'egg',
+    // 七牛
+    qiniu: {
+      bucket: "www-chwech-com", // 空间名
+      expires: 1000, // 过期时间
+      aKey: '_V0UGMIRy_bOG5mG20ZXALwq8zcRt5sOObDzNwXg',
+      sKey: 'xUU4q3HQ66eV9KyCqnhvxVUNMxJ-LMmKKN4qztT5'
+    }
+    
   }
 
   // 配置模板引擎

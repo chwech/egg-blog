@@ -12,6 +12,8 @@ module.exports = app => {
 
   // 七牛
   app.router.get('/qiniu/token', app.jwt, app.controller.qiniu.getToken)
+  app.router.post('/qiniu/delete', app.jwt, app.controller.qiniu.delete)
+
 
 
   // 获取用户信息
