@@ -28,6 +28,25 @@ class CategoryController extends Controller {
 
     this.success(result)
   }
+
+  async destroy() {
+    const { id } = this.ctx.params
+
+    if (parseInt(id) === 1) {
+
+      // TODO: 自定义异常处理
+      // throw new Error('未分类类别不能删除')
+      this.fail(40001, '未分类类别不能删除！')
+      return
+    }
+    const result = await this.ctx.service.category.delete(id)
+  
+    if (result.success) {
+      this.success()
+    } else {
+      this.fail()
+    }
+  }
 }
 
 module.exports = CategoryController

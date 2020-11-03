@@ -14,7 +14,7 @@ class BaseController extends Controller {
     }
   }
 
-  fail (data, code = 40000, message = '操作失败') {
+  fail (code = 40000, message = '操作失败', data) {
     this.ctx.body = {
       code: code,
       data,

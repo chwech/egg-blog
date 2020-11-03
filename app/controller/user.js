@@ -11,6 +11,7 @@ class UserController extends Controller {
     const body = ctx.request.body
     const username = body.username
     const password = body.password
+
     console.log(body)
 
     // 校验参数
@@ -25,7 +26,7 @@ class UserController extends Controller {
     if (userInfo) {
       ctx.logger.info(userInfo.user_pass)
 
-      // TODO: 密码要加密
+      // TODO: 密码要加密加盐
       if (password === userInfo.user_pass) {
         ctx.logger.info('登录成功')
         const token = app.jwt.sign({ username: username }, app.config.jwt.secret)
