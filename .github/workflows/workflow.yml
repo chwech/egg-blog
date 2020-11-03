@@ -52,4 +52,4 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/chwech/docker/egg-blog
-            docker-compose up -d
+            docker-compose up -d --force-recreate
