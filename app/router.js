@@ -27,4 +27,7 @@ module.exports = app => {
 
   // 角色
   app.router.resources('role', '/role', app.controller.role)
+
+  // 错误收集
+  app.router.post('/collect_error', app.controller.error.collect)
 }
