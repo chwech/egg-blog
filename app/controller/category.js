@@ -22,11 +22,37 @@ class CategoryController extends Controller {
     ctx.validate({
       name: { type: 'string', required: true },
       slug: { type: 'string', required: true },
-      parent: { type: 'number' }
+      description: { type: 'string', required: false },
+      parent: { type: 'string', required: false }
     })
     const result = await ctx.service.category.add(body)
 
-    this.success(result)
+    if(result.statu) {
+      this.success(result.data)
+    } else {
+      this.fail(result.data)
+    }
+  }
+
+  async update() {
+    const ctx = this.ctx
+    const body = ctx.request.body
+
+    // 参数校验
+    ctx.validate({
+      id: { type: 'string', required: true },
+      name: { type: 'string', required: true },
+      slug: { type: 'string', required: true },
+      description: { type: 'string', required: false },
+      parent: { type: 'string', required: false }
+    })
+    const result = await ctx.service.category.update(body)
+
+    if(result.statu) {
+      this.success(result.data)
+    } else {
+      this.fail(result.data)
+    }
   }
 
   async destroy() {

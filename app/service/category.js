@@ -7,45 +7,116 @@ class CategoryService extends Service {
     // eslint-disable-next-line max-len
     const categories = await this.app.mysql.query(`
       SELECT 
-        wp_term_taxonomy.*,  wp_term_taxonomy.term_id as id, wp_terms.name, wp_terms.slug, wp_termmeta.meta_value as img
+        wp_term_taxonomy.*, meta2.meta_value as img
       FROM 
         wp_term_taxonomy 
-      LEFT JOIN 
-        wp_terms
-      ON 
-        wp_term_taxonomy.term_id = wp_terms.term_id
       LEFT JOIN
-        wp_termmeta 
+        wp_termmeta meta2
       ON
-        wp_term_taxonomy.term_id = wp_termmeta.term_id
+        wp_term_taxonomy.term_taxonomy_id = meta2.term_id AND meta2.meta_key="img"
       WHERE 
         taxonomy = "category"
-      ORDER BY
-        wp_terms.name
     `)
 
     return categories
   }
 
   async add (data) {
-    const result = await this.app.mysql.insert('wp_terms', { 
-      name: data.name,
-      slug: data.slug
-    })
 
-    await this.app.mysql.insert('wp_term_taxonomy', { 
-      term_id: result.insertId,
-      taxonomy: 'category',
-      parent: data.parent,
-      description: data.description
-    })
-    await this.app.mysql.insert('wp_termmeta', {
-      term_id: result.insertId,
-      meta_key: 'meta_img',
-      meta_value: data.meta_img
-    })
-    this.logger.info(result)
-    return result
+    // const result = await this.app.mysql.insert('wp_terms', { 
+    //   name: data.name,
+    //   slug: data.slug
+    // })
+
+    // await this.app.mysql.insert('wp_term_taxonomy', { 
+    //   term_id: result.insertId,
+    //   taxonomy: 'category',
+    //   parent: data.parent,
+    //   description: data.description
+    // })
+    // await this.app.mysql.insert('wp_termmeta', {
+    //   term_id: result.insertId,
+    //   meta_key: 'meta_img',
+    //   meta_value: data.meta_img
+    // })
+    // this.logger.info(result)
+    // return result
+    try {
+      const result = await this.app.mysql.beginTransactionScope(async conn => {
+        const slugResult = await conn.query(`CALL get_or_add_slug('${data.slug}');`)
+        const insertResult = await conn.query(`
+          INSERT INTO
+            wp_term_taxonomy
+            (term_id, taxonomy, description, parent, name)
+          VALUES
+            (${slugResult[0][0].term_id}, 'category', '${data.description ? data.description : ''}', ${data.parent ? data.parent : 0}, '${data.name}');
+        `)
+  
+        if(insertResult.affectedRows === 1) {
+
+          // const insertMetaResult = await conn.query(`
+          //   INSERT INTO
+          //     wp_termmeta
+          //     (term_id, meta_key, meta_value)
+          //   VALUES
+          //     (${insertResult.insertId}, 'name', '${data.name}');
+          // `)
+
+          return insertResult
+        }
+      }, this.ctx)
+
+      return {
+        statu: true,
+        data: result
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
+  }
+  
+  async update(data) {
+    try {
+      const result = await this.app.mysql.beginTransactionScope(async conn => {
+        const slugResult = await conn.query(`CALL get_or_add_slug('${data.slug}');`)
+        const updateResult = await conn.query(`
+          UPDATE
+            wp_term_taxonomy
+          SET 
+            term_id = ${slugResult[0][0].term_id},
+            description = '${data.description ? data.description : ''}',
+            parent = ${data.parent ? data.parent : 0},
+            name = '${data.name}'
+          WHERE term_taxonomy_id=${data.id};
+        `)
+  
+        if(updateResult.affectedRows === 1) {
+
+          // const updateMetaResult = await conn.query(`
+          //   UPDATE
+          //     wp_termmeta
+          //   SET
+          //     meta_value = '${data.name}'
+          //   WHERE term_id=${data.id} AND meta_key='name';
+          // `)
+
+          return updateResult
+        }
+      }, this.ctx)
+
+      return {
+        statu: true,
+        data: result
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
   }
 
   async delete (id) {

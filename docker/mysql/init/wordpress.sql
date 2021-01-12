@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本机
+ Source Server         : 本地wordpress
  Source Server Type    : MySQL
- Source Server Version : 80012
- Source Host           : localhost:3306
+ Source Server Version : 50732
+ Source Host           : localhost:32769
  Source Schema         : wordpress
 
  Target Server Type    : MySQL
- Target Server Version : 80012
+ Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 29/10/2020 10:44:17
+ Date: 12/01/2021 20:34:06
 */
 
 SET NAMES utf8mb4;
@@ -20,7 +20,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for wp_commentmeta
 -- ----------------------------
-USE wordpress;
 DROP TABLE IF EXISTS `wp_commentmeta`;
 CREATE TABLE `wp_commentmeta`  (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -30,7 +29,11 @@ CREATE TABLE `wp_commentmeta`  (
   PRIMARY KEY (`meta_id`) USING BTREE,
   INDEX `comment_id`(`comment_id`) USING BTREE,
   INDEX `meta_key`(`meta_key`(191)) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of wp_commentmeta
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for wp_comments
@@ -58,7 +61,7 @@ CREATE TABLE `wp_comments`  (
   INDEX `comment_date_gmt`(`comment_date_gmt`) USING BTREE,
   INDEX `comment_parent`(`comment_parent`) USING BTREE,
   INDEX `comment_author_email`(`comment_author_email`(10)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_comments
@@ -85,7 +88,11 @@ CREATE TABLE `wp_links`  (
   `link_rss` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`link_id`) USING BTREE,
   INDEX `link_visible`(`link_visible`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of wp_links
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for wp_options
@@ -98,7 +105,7 @@ CREATE TABLE `wp_options`  (
   `autoload` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'yes',
   PRIMARY KEY (`option_id`) USING BTREE,
   UNIQUE INDEX `option_name`(`option_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7345 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7346 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_options
@@ -272,7 +279,7 @@ CREATE TABLE `wp_postmeta`  (
   PRIMARY KEY (`meta_id`) USING BTREE,
   INDEX `post_id`(`post_id`) USING BTREE,
   INDEX `meta_key`(`meta_key`(191)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 249 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 250 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_postmeta
@@ -480,7 +487,7 @@ CREATE TABLE `wp_posts`  (
   INDEX `type_status_date`(`post_type`, `post_status`, `post_date`, `ID`) USING BTREE,
   INDEX `post_parent`(`post_parent`) USING BTREE,
   INDEX `post_author`(`post_author`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 149 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_posts
@@ -592,6 +599,7 @@ INSERT INTO `wp_posts` VALUES (128, 1, '2020-02-21 14:16:08', '2020-02-21 14:16:
 INSERT INTO `wp_posts` VALUES (129, 1, '2020-02-24 02:12:34', '2020-02-24 02:12:34', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n  2020年2月24日10:11:51更新： 晕，原来是有个dockder容器带木马。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-autosave-v1', '', '', '2020-02-24 02:12:34', '2020-02-24 02:12:34', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\n```\nfind / -name kdevtmpfsi\nfind / -name kinsing\n```\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n2. 排除是否有可疑定时任务\n```crontab -l```\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\n\n3. 把kdevtmpfsi和kinsing进程kill掉。\n```\nps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n```\n\n4. 怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\n\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n> 2020年2月24日10:11:51更新： 晕，原来是有个dockder容器带木马。', 126, 'https://www.chwech.com/2020/02/22/126-autosave-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (130, 1, '2020-02-22 03:00:59', '2020-02-22 03:00:59', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-22 03:00:59', '2020-02-22 03:00:59', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。', 126, 'https://www.chwech.com/2020/02/22/126-revision-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (131, 1, '2020-02-24 02:14:14', '2020-02-24 02:14:14', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n  2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-24 02:14:14', '2020-02-24 02:14:14', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\r\n> 2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。', 126, 'https://www.chwech.com/2020/02/24/126-revision-v1/', 0, 'revision', '', 0);
+INSERT INTO `wp_posts` VALUES (148, 1, '2021-01-12 17:31:32', '2021-01-12 09:31:32', '21111111', '65', '', 'draft', 'open', 'open', '', 'testtest', '', '', '2021-01-12 17:43:22', '2021-01-12 09:43:22', '', 0, '', 0, 'post', '', 0);
 
 -- ----------------------------
 -- Table structure for wp_term_relationships
@@ -630,6 +638,8 @@ INSERT INTO `wp_term_relationships` VALUES (110, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (113, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (117, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (126, 1, 0);
+INSERT INTO `wp_term_relationships` VALUES (148, 20, 0);
+INSERT INTO `wp_term_relationships` VALUES (148, 21, 0);
 
 -- ----------------------------
 -- Table structure for wp_term_taxonomy
@@ -642,21 +652,24 @@ CREATE TABLE `wp_term_taxonomy`  (
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `parent` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `count` bigint(20) NOT NULL DEFAULT 0,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`term_taxonomy_id`) USING BTREE,
-  UNIQUE INDEX `term_id_taxonomy`(`term_id`, `taxonomy`) USING BTREE,
-  INDEX `taxonomy`(`taxonomy`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `typename`(`taxonomy`, `name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_term_taxonomy
 -- ----------------------------
-INSERT INTO `wp_term_taxonomy` VALUES (1, 1, 'category', '', 0, 11);
-INSERT INTO `wp_term_taxonomy` VALUES (2, 2, 'category', '', 0, 1);
-INSERT INTO `wp_term_taxonomy` VALUES (3, 3, 'post_tag', '', 0, 1);
-INSERT INTO `wp_term_taxonomy` VALUES (4, 4, 'category', '', 0, 1);
-INSERT INTO `wp_term_taxonomy` VALUES (5, 5, 'post_tag', '', 0, 1);
-INSERT INTO `wp_term_taxonomy` VALUES (6, 6, 'post_tag', '', 0, 1);
-INSERT INTO `wp_term_taxonomy` VALUES (7, 7, 'category', '', 0, 1);
+INSERT INTO `wp_term_taxonomy` VALUES (1, 1, 'category', '', 0, 11, 'Uncategorized');
+INSERT INTO `wp_term_taxonomy` VALUES (2, 2, 'category', '', 0, 1, 'markdown');
+INSERT INTO `wp_term_taxonomy` VALUES (3, 3, 'post_tag', '', 0, 1, 'markdown');
+INSERT INTO `wp_term_taxonomy` VALUES (4, 4, 'category', '', 0, 1, 'vue');
+INSERT INTO `wp_term_taxonomy` VALUES (5, 5, 'post_tag', '', 0, 1, 'vue');
+INSERT INTO `wp_term_taxonomy` VALUES (6, 6, 'post_tag', '', 0, 1, 'vue-router');
+INSERT INTO `wp_term_taxonomy` VALUES (7, 7, 'category', '', 0, 1, 'JavaScript');
+INSERT INTO `wp_term_taxonomy` VALUES (20, 17, 'category', '4563212', 0, 0, '11122');
+INSERT INTO `wp_term_taxonomy` VALUES (21, 14, 'category', 'test333', 0, 0, 'test33');
+INSERT INTO `wp_term_taxonomy` VALUES (22, 18, 'category', '222', 0, 0, 'tet111');
 
 -- ----------------------------
 -- Table structure for wp_termmeta
@@ -670,7 +683,12 @@ CREATE TABLE `wp_termmeta`  (
   PRIMARY KEY (`meta_id`) USING BTREE,
   INDEX `term_id`(`term_id`) USING BTREE,
   INDEX `meta_key`(`meta_key`(191)) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of wp_termmeta
+-- ----------------------------
+INSERT INTO `wp_termmeta` VALUES (13, 21, 'img', '1');
 
 -- ----------------------------
 -- Table structure for wp_terms
@@ -682,20 +700,21 @@ CREATE TABLE `wp_terms`  (
   `slug` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',
   `term_group` bigint(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`term_id`) USING BTREE,
-  INDEX `slug`(`slug`(191)) USING BTREE,
+  UNIQUE INDEX `slug`(`slug`(191)) USING BTREE,
   INDEX `name`(`name`(191)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_terms
 -- ----------------------------
 INSERT INTO `wp_terms` VALUES (1, 'Uncategorized', 'uncategorized', 0);
 INSERT INTO `wp_terms` VALUES (2, 'markdown', 'markdown', 0);
-INSERT INTO `wp_terms` VALUES (3, 'markdown', 'markdown', 0);
 INSERT INTO `wp_terms` VALUES (4, 'vue', 'vue', 0);
-INSERT INTO `wp_terms` VALUES (5, 'vue', 'vue', 0);
 INSERT INTO `wp_terms` VALUES (6, 'vue-router', 'vue-router', 0);
 INSERT INTO `wp_terms` VALUES (7, 'JavaScript', 'javascript', 0);
+INSERT INTO `wp_terms` VALUES (14, 'vue3', 'vue3', 0);
+INSERT INTO `wp_terms` VALUES (17, 'cccccc', 'cccccc', 0);
+INSERT INTO `wp_terms` VALUES (18, 'tet111', 'tet111', 0);
 
 -- ----------------------------
 -- Table structure for wp_usermeta
@@ -709,7 +728,7 @@ CREATE TABLE `wp_usermeta`  (
   PRIMARY KEY (`umeta_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   INDEX `meta_key`(`meta_key`(191)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_usermeta
@@ -762,5 +781,118 @@ CREATE TABLE `wp_users`  (
 -- Records of wp_users
 -- ----------------------------
 INSERT INTO `wp_users` VALUES (1, 'chwech', 'ggi3h8ggi3h8', 'chwech', '804699297@qq.com', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif', '2019-03-30 09:12:11', '', 0, 'chwech');
+
+-- ----------------------------
+-- Procedure structure for add_relation_between_post_term_taxonomy
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `add_relation_between_post_term_taxonomy`;
+delimiter ;;
+CREATE PROCEDURE `add_relation_between_post_term_taxonomy`(IN f_post_id BIGINT, IN f_category VARCHAR(1000), IN f_delimiter varchar(5))
+BEGIN
+ DECLARE temptermid VARCHAR(200);
+ DECLARE temptermidIndex INT DEFAULT 1;
+ DECLARE temptermidMaxIndex INT DEFAULT func_get_split_string_total(f_category, f_delimiter);
+ WHILE temptermidIndex <= temptermidMaxIndex
+	DO
+	SET temptermid = func_get_split_string(f_category, f_delimiter, temptermidIndex);
+	INSERT INTO wp_term_relationships (object_id, term_taxonomy_id) VALUES (f_post_id, temptermid);
+	SET temptermidIndex = temptermidIndex + 1;
+ END WHILE;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for delete_relation_between_post_term_taxonomy
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `delete_relation_between_post_term_taxonomy`;
+delimiter ;;
+CREATE PROCEDURE `delete_relation_between_post_term_taxonomy`(IN f_post_id BIGINT, IN f_category VARCHAR(1000), IN f_delimiter varchar(5))
+BEGIN
+ DECLARE temptermid VARCHAR(200);
+ DECLARE temptermidIndex INT DEFAULT 1;
+ DECLARE temptermidMaxIndex INT DEFAULT func_get_split_string_total(f_category, f_delimiter);
+ WHILE temptermidIndex <= temptermidMaxIndex
+	DO
+	SET temptermid = func_get_split_string(f_category, f_delimiter, temptermidIndex);
+	DELETE FROM wp_term_relationships WHERE object_id = f_post_id AND term_taxonomy_id = temptermid;
+	SET temptermidIndex = temptermidIndex + 1;
+ END WHILE;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Function structure for func_get_category
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_get_category`;
+delimiter ;;
+CREATE FUNCTION `func_get_category`(f_post_id BIGINT)
+ RETURNS varchar(255) CHARSET utf8
+BEGIN
+-- Get the separated number of given string.
+declare result varchar(255) default '';
+SELECT GROUP_CONCAT(wp_term_relationships.term_taxonomy_id) INTO result 
+	FROM 
+		wp_term_relationships 
+	INNER JOIN 
+		wp_term_taxonomy
+	ON 
+		wp_term_taxonomy.taxonomy = 'category' AND wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+	WHERE 
+		object_id = f_post_id;
+return result;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Function structure for func_get_split_string
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_get_split_string`;
+delimiter ;;
+CREATE FUNCTION `func_get_split_string`(f_string varchar(1000),f_delimiter varchar(5),f_order int)
+ RETURNS varchar(255) CHARSET utf8
+BEGIN
+-- Get the separated number of given string.
+declare result varchar(255) default '';
+set result = reverse(substring_index(reverse(substring_index(f_string,f_delimiter,f_order)),f_delimiter,1));
+return result;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Function structure for func_get_split_string_total
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_get_split_string_total`;
+delimiter ;;
+CREATE FUNCTION `func_get_split_string_total`(f_string varchar(1000),f_delimiter varchar(5))
+ RETURNS int(11)
+BEGIN
+-- Get the total number of given string.
+return 1+(length(f_string) - length(replace(f_string,f_delimiter,'')));
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for get_or_add_slug
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `get_or_add_slug`;
+delimiter ;;
+CREATE PROCEDURE `get_or_add_slug`(IN f_slug VARCHAR(200))
+BEGIN
+ DECLARE termid BIGINT;
+ SELECT term_id INTO termid FROM wp_terms WHERE slug=f_slug;
+ IF termid IS NOT null THEN
+ SELECT termid as term_id;
+ ELSE
+	INSERT INTO wp_terms (name, slug) VALUES (f_slug, f_slug);
+  SELECT * FROM wp_terms WHERE term_id = LAST_INSERT_ID();
+ END IF;
+END
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;

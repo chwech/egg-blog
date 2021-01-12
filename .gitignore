@@ -13,3 +13,5 @@ run/
 typings/
 .nyc_output/
 dist/
+.vscode
+mysql-data
