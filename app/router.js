@@ -38,4 +38,7 @@ module.exports = app => {
   app.router.post('/slug/add', app.controller.slug.add)
   app.router.post('/slug/update', app.controller.slug.update)
   app.router.post('/slug/delete', app.controller.slug.delete)
+
+  // 错误收集
+  app.router.post('/collect_error', app.controller.error.collect)
 }

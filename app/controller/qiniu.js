@@ -1,14 +1,14 @@
 "use strict"
-const Controller = require('../core/base_controller')
+const Controller = require("../core/base_controller")
 const qiniu = require("qiniu")
 
 class QiniuController extends Controller {
-  constructor (ctx) {
+  constructor(ctx) {
     super(ctx)
     this.init()
   }
-  
-  init () {
+
+  init() {
     this.mac = this._getMac()
     this.bucket = this.config.qiniu.bucket
   }
@@ -17,12 +17,12 @@ class QiniuController extends Controller {
   async getToken() {
     const ctx = this.ctx
     const uploadToken = this._getSimpleToken()
-    
-    ctx.logger.info('请求七牛token', uploadToken)
+
+    ctx.logger.info("请求七牛token", uploadToken)
 
     this.success({
-      url: 'http://up-z2.qiniup.com',
-      token: uploadToken
+      url: "http://up-z2.qiniup.com",
+      token: uploadToken,
     })
   }
 
@@ -31,7 +31,7 @@ class QiniuController extends Controller {
     const ctx = this.ctx
     const body = ctx.request.body
 
-    ctx.logger.info('请求删除资源')
+    ctx.logger.info("请求删除资源")
     const key = body.key
 
     try {
@@ -44,10 +44,9 @@ class QiniuController extends Controller {
       this.logger.error(new Error(error))
       this.fail(error)
     }
-
   }
 
-  _deleteFile (key) {
+  _deleteFile(key) {
     return new Promise((resolve, reject) => {
       const bucketManager = this._getBucketManager()
 
@@ -56,14 +55,14 @@ class QiniuController extends Controller {
           this.logger.error(new Error(err))
           reject(err)
         } else {
-          this.logger.info('删除成功', respInfo.statusCode, respBody)
-          resolve({respBody, respInfo})
+          this.logger.info("删除成功", respInfo.statusCode, respBody)
+          resolve({ respBody, respInfo })
         }
       })
     })
   }
 
-  _getBucketManager () {
+  _getBucketManager() {
     const config = new qiniu.conf.Config()
 
     config.zone = qiniu.zone.Zone_z2 // 华南
@@ -71,19 +70,19 @@ class QiniuController extends Controller {
   }
 
   // 鉴权对象
-  _getMac () {
+  _getMac() {
     const accessKey = this.config.qiniu.aKey
     const secretKey = this.config.qiniu.sKey
     const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
 
     return mac
   }
-  
+
   // 简单上传的凭证
-  _getSimpleToken () {
+  _getSimpleToken() {
     const options = {
       scope: this.bucket,
-      expires: this.config.qiniu.expires
+      expires: this.config.qiniu.expires,
     }
     const putPolicy = new qiniu.rs.PutPolicy(options)
     const uploadToken = putPolicy.uploadToken(this.mac)
