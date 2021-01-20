@@ -167,6 +167,54 @@ class PostService extends Service {
       }
     }
   }
+
+  async deletePost(data) {
+    try {
+
+      const result = await this.app.mysql.beginTransactionScope(async conn => {
+        const needToDelete = await conn.query(`
+          SELECT * FROM
+            wp_posts
+          WHERE 
+            ID=${data.id};
+        `)
+        const postDeleteResult = await conn.query(`
+          DELETE FROM
+            wp_posts
+          WHERE 
+            ID=${data.id};
+        `)
+
+        if(postDeleteResult.affectedRows === 1) {
+          const oldCategoryString = await conn.query(`
+            SELECT func_get_category(${data.id}) as category
+          `)
+          let temp = oldCategoryString[0].category
+          let  oldCategoryArray = [...temp.split(',')]
+
+          if(oldCategoryArray.length > 0) {
+            const deleteRelationResult = await conn.query(`
+              CALL delete_relation_between_post_term_taxonomy(${data.id}, '${oldCategoryArray.join(',')}', ',');
+            `)
+          }
+          return needToDelete
+  
+        } else {
+          return postDeleteResult
+        }
+      })
+
+      return {
+        statu: true,
+        data: result
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
+  }
 }
 
 module.exports = PostService

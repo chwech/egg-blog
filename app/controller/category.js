@@ -56,21 +56,27 @@ class CategoryController extends Controller {
   }
 
   async destroy() {
-    const { id } = this.ctx.params
+    const ctx = this.ctx
+    const body = ctx.request.body
 
-    if (parseInt(id) === 1) {
+    // 参数校验
+
+    ctx.validate({
+      id: { type: 'string', required: true },
+    })
+    if (parseInt(ctx.request.body.id) === 1) {
 
       // TODO: 自定义异常处理
       // throw new Error('未分类类别不能删除')
-      this.fail(40001, '未分类类别不能删除！')
+      this.fail({}, '未分类类别不能删除！', 40001)
       return
     }
-    const result = await this.ctx.service.category.delete(id)
+    const result = await this.ctx.service.category.delete(body)
   
-    if (result.success) {
-      this.success()
+    if (result.statu) {
+      this.success(result)
     } else {
-      this.fail()
+      this.fail(result)
     }
   }
 }

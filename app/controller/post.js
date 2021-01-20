@@ -74,6 +74,25 @@ class PostController extends Controller {
       this.fail(result.data)
     }
   }
+
+  async delete() {
+    const ctx = this.ctx
+    const body = ctx.request.body
+
+    // 参数校验
+    ctx.validate({
+      id: { type: 'string', required: true },
+    })
+
+    ctx.logger.info('删除文章')
+    const result = await ctx.service.post.deletePost(body)
+
+    if(result.statu) {
+      this.success(result.data)
+    } else {
+      this.fail(result.data)
+    }
+  }
 }
 
 module.exports = PostController

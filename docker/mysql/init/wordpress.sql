@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 12/01/2021 20:34:06
+ Date: 20/01/2021 22:13:33
 */
 
 SET NAMES utf8mb4;
@@ -487,7 +487,7 @@ CREATE TABLE `wp_posts`  (
   INDEX `type_status_date`(`post_type`, `post_status`, `post_date`, `ID`) USING BTREE,
   INDEX `post_parent`(`post_parent`) USING BTREE,
   INDEX `post_author`(`post_author`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 149 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 152 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_posts
@@ -600,6 +600,7 @@ INSERT INTO `wp_posts` VALUES (129, 1, '2020-02-24 02:12:34', '2020-02-24 02:12:
 INSERT INTO `wp_posts` VALUES (130, 1, '2020-02-22 03:00:59', '2020-02-22 03:00:59', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-22 03:00:59', '2020-02-22 03:00:59', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。', 126, 'https://www.chwech.com/2020/02/22/126-revision-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (131, 1, '2020-02-24 02:14:14', '2020-02-24 02:14:14', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n  2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-24 02:14:14', '2020-02-24 02:14:14', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\r\n> 2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。', 126, 'https://www.chwech.com/2020/02/24/126-revision-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (148, 1, '2021-01-12 17:31:32', '2021-01-12 09:31:32', '21111111', '65', '', 'draft', 'open', 'open', '', 'testtest', '', '', '2021-01-12 17:43:22', '2021-01-12 09:43:22', '', 0, '', 0, 'post', '', 0);
+INSERT INTO `wp_posts` VALUES (151, 1, '2021-01-20 22:12:07', '2021-01-20 14:12:07', '2', '1', '1', 'draft', 'open', 'open', '', 'testtest', '', '', '2021-01-20 22:12:07', '2021-01-20 14:12:07', '', 0, '', 0, 'post', '', 0);
 
 -- ----------------------------
 -- Table structure for wp_term_relationships
@@ -639,7 +640,9 @@ INSERT INTO `wp_term_relationships` VALUES (113, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (117, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (126, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (148, 20, 0);
-INSERT INTO `wp_term_relationships` VALUES (148, 21, 0);
+INSERT INTO `wp_term_relationships` VALUES (151, 20, 0);
+INSERT INTO `wp_term_relationships` VALUES (151, 22, 0);
+INSERT INTO `wp_term_relationships` VALUES (151, 24, 0);
 
 -- ----------------------------
 -- Table structure for wp_term_taxonomy
@@ -655,7 +658,7 @@ CREATE TABLE `wp_term_taxonomy`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`term_taxonomy_id`) USING BTREE,
   UNIQUE INDEX `typename`(`taxonomy`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_term_taxonomy
@@ -667,9 +670,9 @@ INSERT INTO `wp_term_taxonomy` VALUES (4, 4, 'category', '', 0, 1, 'vue');
 INSERT INTO `wp_term_taxonomy` VALUES (5, 5, 'post_tag', '', 0, 1, 'vue');
 INSERT INTO `wp_term_taxonomy` VALUES (6, 6, 'post_tag', '', 0, 1, 'vue-router');
 INSERT INTO `wp_term_taxonomy` VALUES (7, 7, 'category', '', 0, 1, 'JavaScript');
-INSERT INTO `wp_term_taxonomy` VALUES (20, 17, 'category', '4563212', 0, 0, '11122');
-INSERT INTO `wp_term_taxonomy` VALUES (21, 14, 'category', 'test333', 0, 0, 'test33');
-INSERT INTO `wp_term_taxonomy` VALUES (22, 18, 'category', '222', 0, 0, 'tet111');
+INSERT INTO `wp_term_taxonomy` VALUES (20, 17, 'category', '4563212', 0, 1, '11122');
+INSERT INTO `wp_term_taxonomy` VALUES (22, 18, 'category', '222', 0, 3, 'tet111');
+INSERT INTO `wp_term_taxonomy` VALUES (24, 18, 'category', '222', 0, 1, 'cc');
 
 -- ----------------------------
 -- Table structure for wp_termmeta
@@ -796,6 +799,7 @@ BEGIN
 	DO
 	SET temptermid = func_get_split_string(f_category, f_delimiter, temptermidIndex);
 	INSERT INTO wp_term_relationships (object_id, term_taxonomy_id) VALUES (f_post_id, temptermid);
+	UPDATE wp_term_taxonomy SET count = count + 1 WHERE term_taxonomy_id = temptermid;
 	SET temptermidIndex = temptermidIndex + 1;
  END WHILE;
 END
@@ -816,6 +820,7 @@ BEGIN
 	DO
 	SET temptermid = func_get_split_string(f_category, f_delimiter, temptermidIndex);
 	DELETE FROM wp_term_relationships WHERE object_id = f_post_id AND term_taxonomy_id = temptermid;
+	UPDATE wp_term_taxonomy SET count = count - 1 WHERE term_taxonomy_id = temptermid;
 	SET temptermidIndex = temptermidIndex + 1;
  END WHILE;
 END

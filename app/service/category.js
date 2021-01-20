@@ -119,26 +119,61 @@ class CategoryService extends Service {
     }
   }
 
-  async delete (id) {
+  async delete (data) {
+    try {
 
-    // 如果标签上有图像，删除掉七牛云上的资源
-    // 删除分类事务
-    const result = await this.app.mysql.beginTransactionScope(async conn => {
+      // 如果标签上有图像，删除掉七牛云上的资源
+      // 删除分类事务
+      const result = await this.app.mysql.beginTransactionScope(async conn => {
+  
+        // 将在这个分类下的文章设为未分类
+        // await conn.query(`update wp_term_relationships set term_taxonomy_id = 1 where term_taxonomy_id = ?`, [this.app.mysql.escape(data.id)])
+  
+        // update 列和where有相同值有bug https://github.com/ali-sdk/ali-rds/issues/66
+        // await conn.update('wp_term_relationships', { term_taxonomy_id: 1 }, { 
+        //   where: { term_taxonomy_id: id },
+        //   columns: [ 'term_taxonomy_id' ]
+        // })
+        const needToDelete = await conn.query(`
+          SELECT
+           *
+          FROM 
+            wp_term_taxonomy
+          WHERE 
+            term_taxonomy_id=${data.id};
+        `)
+        const categoryDeleteResult = await conn.query(`
+          DELETE FROM
+            wp_term_taxonomy
+          WHERE 
+            term_taxonomy_id=${data.id};
+        `)
 
-      // 将在这个分类下的文章设为未分类
-      await conn.query(`update wp_term_relationships set term_taxonomy_id = 1 where term_taxonomy_id = ?`, [this.app.mysql.escape(id)])
-
-      // update 列和where有相同值有bug https://github.com/ali-sdk/ali-rds/issues/66
-      // await conn.update('wp_term_relationships', { term_taxonomy_id: 1 }, { 
-      //   where: { term_taxonomy_id: id },
-      //   columns: [ 'term_taxonomy_id' ]
-      // })
-      await conn.delete('wp_term_taxonomy', { term_id: id })
-      await conn.delete('wp_terms', { term_id: id })
-      return { success: true }
-    }, this.ctx)
-
-    return result
+        if(categoryDeleteResult.affectedRows === 1) {
+  
+          const categoryRelationsDeleteResult = await conn.query(`
+            DELETE FROM
+              wp_term_relationships
+            WHERE 
+              term_taxonomy_id=${data.id};
+          `)
+  
+          return needToDelete
+        } else {
+          return categoryDeleteResult
+        }
+      }, this.ctx)
+      
+      return {
+        statu: true,
+        data: result
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
   }
 }
 
