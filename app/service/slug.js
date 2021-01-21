@@ -93,7 +93,7 @@ class SlugService extends Service {
       UPDATE
         wp_term_taxonomy
       SET
-        term_id = 0
+        term_id = 1
       WHERE
         term_id=${data.id};
     `)
@@ -108,6 +108,54 @@ class SlugService extends Service {
       return {
         statu: false,
         data: deleteSlugsResult
+      }
+    }
+  }
+
+  async getCategory(data) {
+    try {
+      const category = await this.app.mysql.query(`
+        SELECT
+          *
+        FROM 
+          wp_term_taxonomy
+        WHERE 
+          term_id = (SELECT term_id FROM wp_terms WHERE slug = '${data.slug}');
+      `)
+
+      return {
+        statu: true,
+        data: category
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
+  }
+
+  async getPost(data) {
+    try {
+      const category = await this.app.mysql.query(`
+        SELECT DISTINCT 
+          wp.*
+        FROM 
+          wp_posts wp
+        INNER JOIN
+          wp_term_relationships ws
+        ON
+          wp.ID = ws.object_id AND ws.term_taxonomy_id in (func_slug_get_category('${data.slug}'));
+      `)
+
+      return {
+        statu: true,
+        data: category
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
       }
     }
   }

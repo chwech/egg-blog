@@ -73,6 +73,42 @@ class SlugController extends Controller {
       this.fail(result.data)
     }
   }
+
+  async getcategory() {
+    const ctx = this.ctx
+    const body = ctx.request.body
+
+    // 参数校验
+    ctx.validate({
+      slug: { type: 'string', requred: true }
+    })
+    ctx.logger.info('获取slug下分类目录')
+    const result = await ctx.service.slug.getCategory(body)
+
+    if(result.statu) {
+      this.success(result.data)
+    } else {
+      this.fail(result.data)
+    }
+  }
+
+  async getpost() {
+    const ctx = this.ctx
+    const body = ctx.request.body
+
+    // 参数校验
+    ctx.validate({
+      slug: { type: 'string', requred: true }
+    })
+    ctx.logger.info('获取slug下文章')
+    const result = await ctx.service.slug.getPost(body)
+
+    if(result.statu) {
+      this.success(result.data)
+    } else {
+      this.fail(result.data)
+    }
+  }
 }
 
 module.exports = SlugController

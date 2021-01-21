@@ -175,6 +175,31 @@ class CategoryService extends Service {
       }
     }
   }
+
+  async getPost(data) {
+    try {
+      const category = await this.app.mysql.query(`
+        SELECT
+          wp.*
+        FROM 
+          wp_posts wp
+        INNER JOIN
+          wp_term_relationships ws
+        ON
+          wp.ID = ws.object_id AND ws.term_taxonomy_id = ${data.id};
+      `)
+
+      return {
+        statu: true,
+        data: category
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
+  }
 }
 
 module.exports = CategoryService

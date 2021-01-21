@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 20/01/2021 22:13:33
+ Date: 21/01/2021 22:53:31
 */
 
 SET NAMES utf8mb4;
@@ -639,7 +639,7 @@ INSERT INTO `wp_term_relationships` VALUES (110, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (113, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (117, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (126, 1, 0);
-INSERT INTO `wp_term_relationships` VALUES (148, 20, 0);
+INSERT INTO `wp_term_relationships` VALUES (148, 22, 0);
 INSERT INTO `wp_term_relationships` VALUES (151, 20, 0);
 INSERT INTO `wp_term_relationships` VALUES (151, 22, 0);
 INSERT INTO `wp_term_relationships` VALUES (151, 24, 0);
@@ -705,7 +705,7 @@ CREATE TABLE `wp_terms`  (
   PRIMARY KEY (`term_id`) USING BTREE,
   UNIQUE INDEX `slug`(`slug`(191)) USING BTREE,
   INDEX `name`(`name`(191)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_terms
@@ -877,6 +877,28 @@ CREATE FUNCTION `func_get_split_string_total`(f_string varchar(1000),f_delimiter
 BEGIN
 -- Get the total number of given string.
 return 1+(length(f_string) - length(replace(f_string,f_delimiter,'')));
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Function structure for func_slug_get_category
+-- ----------------------------
+DROP FUNCTION IF EXISTS `func_slug_get_category`;
+delimiter ;;
+CREATE FUNCTION `func_slug_get_category`(f_slug varchar(200))
+ RETURNS varchar(255) CHARSET utf8
+BEGIN
+-- Get the separated number of given string.
+declare result varchar(255) default '';
+SELECT GROUP_CONCAT(wp_term_taxonomy.term_taxonomy_id) INTO result 
+	FROM 
+		wp_term_taxonomy 
+	INNER JOIN 
+		wp_terms
+	ON 
+		wp_term_taxonomy.term_id = wp_terms.term_id AND wp_terms.slug = f_slug;
+return result;
 END
 ;;
 delimiter ;

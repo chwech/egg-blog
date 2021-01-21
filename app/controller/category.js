@@ -79,6 +79,24 @@ class CategoryController extends Controller {
       this.fail(result)
     }
   }
+
+  async getpost() {
+    const ctx = this.ctx
+    const body = ctx.request.body
+
+    // 参数校验
+
+    ctx.validate({
+      id: { type: 'string', required: true },
+    })
+    const result = await this.ctx.service.category.getPost(body)
+  
+    if (result.statu) {
+      this.success(result)
+    } else {
+      this.fail(result)
+    }
+  }
 }
 
 module.exports = CategoryController

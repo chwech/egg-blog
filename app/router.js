@@ -31,6 +31,7 @@ module.exports = app => {
   app.router.resources('category', '/category', app.controller.category)
   app.router.post('/category/update', app.controller.category.update)
   app.router.post('/category/delete', app.controller.category.destroy)
+  app.router.post('/category/getpost', app.controller.category.getpost)
 
   // 角色
   app.router.resources('role', '/role', app.controller.role)
@@ -40,6 +41,8 @@ module.exports = app => {
   app.router.post('/slug/add', app.controller.slug.add)
   app.router.post('/slug/update', app.controller.slug.update)
   app.router.post('/slug/delete', app.controller.slug.delete)
+  app.router.post('/slug/getcategory', app.controller.slug.getcategory)
+  app.router.post('/slug/getpost', app.controller.slug.getpost)
 
   // 错误收集
   app.router.post('/collect_error', app.controller.error.collect)
