@@ -83,14 +83,22 @@ class SlugService extends Service {
         WHERE 
           term_id=${data.id};
       `)
-    const slugsResult = await this.app.mysql.query(`
+    const deleteSlugsResult = await this.app.mysql.query(`
       DELETE FROM
         wp_terms
       WHERE 
         term_id=${data.id};
     `)
+    const deleteSlugRelationResult = await this.app.mysql.query(`
+      UPDATE
+        wp_term_taxonomy
+      SET
+        term_id = 0
+      WHERE
+        term_id=${data.id};
+    `)
 
-    if(slugsResult.affectedRows === 1) {
+    if(deleteSlugsResult.affectedRows === 1) {
 
       return {
         statu: true,
@@ -99,7 +107,7 @@ class SlugService extends Service {
     } else {
       return {
         statu: false,
-        data: slugsResult
+        data: deleteSlugsResult
       }
     }
   }
