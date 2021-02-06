@@ -7,16 +7,22 @@ class CategoryService extends Service {
     // eslint-disable-next-line max-len
     const categories = await this.app.mysql.query(`
       SELECT 
-        wp_term_taxonomy.*, meta2.meta_value as img
+        wp_term_taxonomy.term_taxonomy_id as id, wp_term_taxonomy.term_id, wp_term_taxonomy.taxonomy,
+        wp_term_taxonomy.description, wp_term_taxonomy.parent, wp_term_taxonomy.name, wp_term_taxonomy.count, meta2.meta_value as img, wp_terms.slug
       FROM 
         wp_term_taxonomy 
       LEFT JOIN
         wp_termmeta meta2
       ON
         wp_term_taxonomy.term_taxonomy_id = meta2.term_id AND meta2.meta_key="img"
+      LEFT JOIN
+        wp_terms
+      ON
+        wp_term_taxonomy.term_id = wp_terms.term_id
       WHERE 
         taxonomy = "category"
     `)
+
 
     return categories
   }
@@ -54,13 +60,13 @@ class CategoryService extends Service {
   
         if(insertResult.affectedRows === 1) {
 
-          // const insertMetaResult = await conn.query(`
-          //   INSERT INTO
-          //     wp_termmeta
-          //     (term_id, meta_key, meta_value)
-          //   VALUES
-          //     (${insertResult.insertId}, 'name', '${data.name}');
-          // `)
+          const insertMetaResult = await conn.query(`
+            INSERT INTO
+              wp_termmeta
+              (term_id, meta_key, meta_value)
+            VALUES
+              (${insertResult.insertId}, 'img', '${data.img ? data.img : ''}');
+          `)
 
           return insertResult
         }
@@ -94,14 +100,33 @@ class CategoryService extends Service {
         `)
   
         if(updateResult.affectedRows === 1) {
+          const isHasImgMeta = await conn.query(`
+            SELECT
+              meta_id
+            FROM 
+              wp_termmeta
+            WHERE 
+              term_id=${data.id} AND meta_key='img';
+          `)
 
-          // const updateMetaResult = await conn.query(`
-          //   UPDATE
-          //     wp_termmeta
-          //   SET
-          //     meta_value = '${data.name}'
-          //   WHERE term_id=${data.id} AND meta_key='name';
-          // `)
+          if(isHasImgMeta.length > 0) {
+
+            const updateMetaResult = await conn.query(`
+              UPDATE
+                wp_termmeta
+              SET
+                meta_value = '${data.img}'
+              WHERE term_id=${data.id} AND meta_key='img';
+            `)
+          } else {
+            const updateMetaResult = await conn.query(`
+            INSERT INTO
+              wp_termmeta
+              (term_id, meta_key, meta_value)
+            VALUES
+              (${data.id}, 'img', '${data.img ? data.img : ''}');
+          `)
+          }
 
           return updateResult
         }
@@ -148,6 +173,7 @@ class CategoryService extends Service {
           WHERE 
             term_taxonomy_id=${data.id};
         `)
+        
 
         if(categoryDeleteResult.affectedRows === 1) {
   
@@ -157,6 +183,12 @@ class CategoryService extends Service {
             WHERE 
               term_taxonomy_id=${data.id};
           `)
+          const categoryDeleteMetaResult = await conn.query(`
+          DELETE FROM
+            wp_termmeta
+          WHERE 
+            term_taxonomy_id=${data.id};
+        `)
   
           return needToDelete
         } else {

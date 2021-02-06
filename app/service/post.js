@@ -10,8 +10,14 @@ class PostService extends Service {
       SELECT * FROM wp_posts
       LIMIT ${data.pageSize} OFFSET ${(Number(data.currentPage) - 1) * Number(data.pageSize)};
     `)
+    const total = await this.getCount()
 
-    return posts
+    return {
+      posts: posts,
+      total: total,
+      pageSize: Number(data.pageSize),
+      currentPage: Math.min(Math.ceil(total / Number(data.pageSize)), Number(data.currentPage))
+    }
   }
 
   async getCount () {

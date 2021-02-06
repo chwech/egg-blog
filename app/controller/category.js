@@ -23,7 +23,8 @@ class CategoryController extends Controller {
       name: { type: 'string', required: true },
       slug: { type: 'string', required: true },
       description: { type: 'string', required: false },
-      parent: { type: 'string', required: false }
+      parent: { type: 'number', required: false },
+      img: { type: 'string', required: false }
     })
     const result = await ctx.service.category.add(body)
 
@@ -40,11 +41,12 @@ class CategoryController extends Controller {
 
     // 参数校验
     ctx.validate({
-      id: { type: 'string', required: true },
+      id: { type: 'number', required: true },
       name: { type: 'string', required: true },
       slug: { type: 'string', required: true },
       description: { type: 'string', required: false },
-      parent: { type: 'string', required: false }
+      parent: { type: 'number', required: false },
+      img: { type: 'string', required: false }
     })
     const result = await ctx.service.category.update(body)
 
@@ -62,7 +64,7 @@ class CategoryController extends Controller {
     // 参数校验
 
     ctx.validate({
-      id: { type: 'string', required: true },
+      id: { type: 'number', required: true },
     })
     if (parseInt(ctx.request.body.id) === 1) {
 
