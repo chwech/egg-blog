@@ -5,22 +5,26 @@ const Controller = require('../core/base_controller')
 class PostController extends Controller {
   async index() {
     const ctx = this.ctx
-    const body = ctx.request.body
+    const body = ctx.request.query
 
     // 参数校验
     ctx.validate({
-      currentPage: { type: 'string', required: false },
-      pageSize: { type: 'string', required: false },
-    })
+      currentPage: { type: 'string', required: true },
+      pageSize: { type: 'string', required: true },
+      category: { type: 'string', required: true},
+      isTrash: { type: 'string', required: true}
+    }, ctx.request.query)
 
     ctx.logger.info('请求文章列表')
     const posts = await ctx.service.post.getList(body)
-    const [{ total }] = await ctx.service.post.getCount()
+
+    // const [{ total }] = await ctx.service.post.getCount()
 
     this.success(
       {
         items: posts,
-        total: total
+
+        // total: total
       }
     )
   }
@@ -34,7 +38,7 @@ class PostController extends Controller {
       title: { type: 'string', required: true },
       content: { type: 'string', required: true },
       status: { type: 'string', required: true },
-      auth: { type: 'string', required: true },
+      auth: { type: 'number', required: true },
       postName: { type: 'string', required: true },
       tag: { type: 'string', required: false },
       category: { type: 'string', required: false },
@@ -56,12 +60,12 @@ class PostController extends Controller {
 
     // 参数校验
     ctx.validate({
-      id: { type: 'string', required: true },
+      id: { type: 'number', required: true },
       title: { type: 'string', required: true },
       content: { type: 'string', required: true },
       status: { type: 'string', required: true },
       postName: { type: 'string', required: true },
-      tag: { type: 'string', required: true },
+      tag: { type: 'string', required: false },
       category: { type: 'string', required: true },
     })
 
@@ -75,13 +79,32 @@ class PostController extends Controller {
     }
   }
 
+  async trash() {
+    const ctx = this.ctx
+    const body = ctx.request.body
+
+    // 参数校验
+    ctx.validate({
+      id: { type: 'number', required: true },
+      isTrash: { type: 'number', required: true }
+    })
+    
+    ctx.logger.info('文章移入移出回收站')
+    const result = await ctx.service.post.trashPost(body)
+
+    if(result.statu) {
+      this.success(result.data)
+    } else {
+      this.fail(result.data)
+    }
+  }
   async delete() {
     const ctx = this.ctx
     const body = ctx.request.body
 
     // 参数校验
     ctx.validate({
-      id: { type: 'string', required: true },
+      id: { type: 'number', required: true },
     })
 
     ctx.logger.info('删除文章')

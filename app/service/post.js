@@ -6,11 +6,33 @@ const moment =require('moment')
 class PostService extends Service {
   async getList(data) {
     // eslint-disable-next-line max-len
-    const posts = await this.app.mysql.query(`
-      SELECT * FROM wp_posts
-      LIMIT ${data.pageSize} OFFSET ${(Number(data.currentPage) - 1) * Number(data.pageSize)};
-    `)
-    const total = await this.getCount()
+    // const posts = await this.app.mysql.query(`
+    //   SELECT wp.ID, wp.post_title, wp.post_modified, wp.post_status, wp_users.user_nicename as author, GROUP_CONCAT(wp_c.name) as category_name
+    //   FROM 
+    //     wp_posts wp
+    //   LEFT JOIN
+    //     wp_users
+    //   ON
+    //     wp.post_author = wp_users.ID
+    //   LEFT JOIN
+    //     wp_term_relationships wp_r
+    //   ON
+    //     wp.ID = wp_r.object_id
+    //   LEFT JOIN
+    //     wp_term_taxonomy wp_c
+    //   ON 
+    //     wp_r.term_taxonomy_id = wp_c.term_taxonomy_id
+    //   WHERE
+    //     wp.post_status = 'publish' OR wp.post_status = 'draft'
+    //   GROUP BY wp.ID
+    //   ORDER BY wp.post_modified DESC
+    //   LIMIT ${data.pageSize} OFFSET ${(Number(data.currentPage) - 1) * Number(data.pageSize)};
+    // `)
+
+    // const [{ total }] = await this.getCount()
+    const getPostResult = await this.app.mysql.query(`CALL getFilterPost(${Number(data.currentPage)}, ${Number(data.pageSize)}, ${Number(data.category)}, ${Number(data.isTrash)})`)
+    const posts = getPostResult[0]
+    const [{ total }] = getPostResult[1]
 
     return {
       posts: posts,
@@ -21,7 +43,7 @@ class PostService extends Service {
   }
 
   async getCount () {
-    const count = await this.app.mysql.query('select count(*) as total from wp_posts')
+    const count = await this.app.mysql.query(`select count(*) as total from wp_posts WHERE post_status = 'publish' OR post_status = 'draft';`)
 
     return count
   }
@@ -173,7 +195,35 @@ class PostService extends Service {
       }
     }
   }
+  async trashPost(data) {
+    try {
 
+      const result = await this.app.mysql.beginTransactionScope(async conn => {
+        const nowTime = moment().format('YYYY-MM-DD HH:mm:ss')
+        const nowTimeUTC = moment.utc().format('YYYY-MM-DD HH:mm:ss')
+        const trashResult = await conn.query(`
+        UPDATE
+          wp_posts
+        SET
+          post_status = '${data.isTrash === 0 ? 'trash': 'draft'}',
+          post_modified = '${nowTime}',
+          post_modified_gmt = '${nowTimeUTC}'
+        WHERE 
+        ID = ${data.id}
+        `)
+      })
+
+      return {
+        statu: true,
+        data: result
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
+  }
   async deletePost(data) {
     try {
 

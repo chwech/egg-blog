@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 21/01/2021 22:53:31
+ Date: 20/02/2021 17:57:15
 */
 
 SET NAMES utf8mb4;
@@ -487,7 +487,7 @@ CREATE TABLE `wp_posts`  (
   INDEX `type_status_date`(`post_type`, `post_status`, `post_date`, `ID`) USING BTREE,
   INDEX `post_parent`(`post_parent`) USING BTREE,
   INDEX `post_author`(`post_author`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 152 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 160 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_posts
@@ -593,14 +593,12 @@ INSERT INTO `wp_posts` VALUES (120, 1, '2019-12-24 15:09:16', '2019-12-24 15:09:
 INSERT INTO `wp_posts` VALUES (121, 1, '2019-12-24 15:10:30', '2019-12-24 15:10:30', '<h1>前言</h1>\n\n最近计划和小伙伴们开发一款小程序，工期一个月，由于我没有学过原生小程序的写法，开发框架选择了更新还算频繁的uni-app，美团的mpvue已经很久没更新了，所以就不考虑了。以下是在下使用uni-app过程遇到的坑点。在这里简单记录下\n\n<h1>遇到的问题</h1>\n\n<ol>\n<li>引入小程序ui组件库<br />\n在开发小程序具体功能之前，首先当然是选择一款ui库了，这样能节省很多时间，我选择了vant-weapp。vant-weapp是一款小程序组件库，在uni-app框架中使用时要注意点是： \n    1. 小程序组件必需放在wxcomponents目录里的。\n    2. 当需要在 vue 组件中使用小程序组件时，pages.json配置引入时不要在页面的style的usingComponents下引入，而是应该在globalStyle下usingComponents引入。如果在页面级usingComponents引入小程序组件来使用，嵌套的vue组件是不能用小程序组件的，而且没有任何报错。</li>\n</ol>\n\nexample:<br />\n<a href=\"https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png\" title=\"引入小程序组件的目录结构\"><img src=\"https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png\" alt=\"引入小程序组件的目录结构\" title=\"引入小程序组件的目录结构\" /></a>\n\n<pre><code class=\"language-json \">\"globalStyle\": {\n    \"usingComponents\": {\n        \"van-button\": \"/wxcomponents/vant-weapp/button/index\"\n    }\n}\n</code></pre>', '[填坑] 使用uni-app开发小程序踩坑，持续更新中~', '', 'inherit', 'closed', 'closed', '', '117-revision-v1', '', '', '2019-12-24 15:10:30', '2019-12-24 15:10:30', '# 前言\r\n最近计划和小伙伴们开发一款小程序，工期一个月，由于我没有学过原生小程序的写法，开发框架选择了更新还算频繁的uni-app，美团的mpvue已经很久没更新了，所以就不考虑了。以下是在下使用uni-app过程遇到的坑点。在这里简单记录下\r\n\r\n# 遇到的问题\r\n1. 引入小程序ui组件库  \r\n在开发小程序具体功能之前，首先当然是选择一款ui库了，这样能节省很多时间，我选择了vant-weapp。vant-weapp是一款小程序组件库，在uni-app框架中使用时要注意点是： \r\n		1. 小程序组件必需放在wxcomponents目录里的。\r\n		2. 当需要在 vue 组件中使用小程序组件时，pages.json配置引入时不要在页面的style的usingComponents下引入，而是应该在globalStyle下usingComponents引入。如果在页面级usingComponents引入小程序组件来使用，嵌套的vue组件是不能用小程序组件的，而且没有任何报错。\r\n\r\nexample:  \r\n[![引入小程序组件的目录结构](https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png \"引入小程序组件的目录结构\")](https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png \"引入小程序组件的目录结构\")\r\n``` json\r\n&quot;globalStyle&quot;: {\r\n	&quot;usingComponents&quot;: {\r\n		&quot;van-button&quot;: &quot;/wxcomponents/vant-weapp/button/index&quot;\r\n	}\r\n}\r\n```', 117, 'https://www.chwech.com/2019/12/24/117-revision-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (123, 1, '2020-01-03 07:12:59', '2020-01-03 07:12:59', '<h1>前言</h1>\n\n最近计划和小伙伴们开发一款小程序，工期一个月，由于我没有学过原生小程序的写法，开发框架选择了更新还算频繁的uni-app，美团的mpvue已经很久没更新了，所以就不考虑了。以下是在下使用uni-app过程遇到的坑点。在这里简单记录下\n\n<h1>遇到的问题</h1>\n\n<ol>\n<li>引入小程序ui组件库<br />\n在开发小程序具体功能之前，首先当然是选择一款ui库了，这样能节省很多时间，我选择了vant-weapp。vant-weapp是一款小程序组件库，在uni-app框架中使用时要注意点是： \n    1. 小程序组件必需放在wxcomponents目录里的。\n    2. 当需要在 vue 组件中使用小程序组件时，pages.json配置引入时不要在页面的style的usingComponents下引入，而是应该在globalStyle下usingComponents引入。如果在页面级usingComponents引入小程序组件来使用，嵌套的vue组件是不能用小程序组件的，而且没有任何报错。</li>\n</ol>\n\nexample:<br />\n<a href=\"https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png\" title=\"引入小程序组件的目录结构\"><img src=\"https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png\" alt=\"引入小程序组件的目录结构\" title=\"引入小程序组件的目录结构\" /></a>\n\n<pre><code class=\"language-json \">\"globalStyle\": {\n    \"usingComponents\": {\n        \"van-button\": \"/wxcomponents/vant-weapp/button/index\"\n    }\n}\n</code></pre>\n\n<ol start=\"2\">\n<li>uni不支持使用Vue.use注册Vue全局组件<br />\nuni不支持使用Vue.use注册Vue全局组件，解决办法是直接在main.js里使用全局注册。</li>\n<li>在组件定义标签上不能用v-show</li>\n</ol>\n\n<pre><code class=\"\">    // 在组件定义的标签上使用v-show没作用\n    &lt;my-component v-show=\"flag\"&gt;&lt;/my-component&gt;\n\n    // 在普通标签使用没有问题\n    &lt;div v-show=\"flag\"&gt;条件编译v-show&lt;/div&gt;\n</code></pre>\n\n解决办法： 使用v-if替换v-show。需要注意v-if与v-show的区别', '[填坑] 使用uni-app开发小程序踩坑，持续更新中~', '', 'inherit', 'closed', 'closed', '', '117-autosave-v1', '', '', '2020-01-03 07:12:59', '2020-01-03 07:12:59', '# 前言\n最近计划和小伙伴们开发一款小程序，工期一个月，由于我没有学过原生小程序的写法，开发框架选择了更新还算频繁的uni-app，美团的mpvue已经很久没更新了，所以就不考虑了。以下是在下使用uni-app过程遇到的坑点。在这里简单记录下\n\n# 遇到的问题\n1. 引入小程序ui组件库  \n在开发小程序具体功能之前，首先当然是选择一款ui库了，这样能节省很多时间，我选择了vant-weapp。vant-weapp是一款小程序组件库，在uni-app框架中使用时要注意点是： \n		1. 小程序组件必需放在wxcomponents目录里的。\n		2. 当需要在 vue 组件中使用小程序组件时，pages.json配置引入时不要在页面的style的usingComponents下引入，而是应该在globalStyle下usingComponents引入。如果在页面级usingComponents引入小程序组件来使用，嵌套的vue组件是不能用小程序组件的，而且没有任何报错。\n\nexample:  \n[![引入小程序组件的目录结构](https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png \"引入小程序组件的目录结构\")](https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png \"引入小程序组件的目录结构\")\n``` json\n&quot;globalStyle&quot;: {\n	&quot;usingComponents&quot;: {\n		&quot;van-button&quot;: &quot;/wxcomponents/vant-weapp/button/index&quot;\n	}\n}\n```\n2. uni不支持使用Vue.use注册Vue全局组件  \nuni不支持使用Vue.use注册Vue全局组件，解决办法是直接在main.js里使用全局注册。\n3. 在组件定义标签上不能用v-show\n```\n	// 在组件定义的标签上使用v-show没作用\n	&lt;my-component v-show=&quot;flag&quot;&gt;&lt;/my-component&gt;\n	\n	// 在普通标签使用没有问题\n	&lt;div v-show=&quot;flag&quot;&gt;条件编译v-show&lt;/div&gt;\n```\n解决办法： 使用v-if替换v-show。需要注意v-if与v-show的区别', 117, 'https://www.chwech.com/2020/01/03/117-autosave-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (124, 1, '2020-01-03 07:14:55', '2020-01-03 07:14:55', '<h1>前言</h1>\n\n最近计划和小伙伴们开发一款小程序，工期一个月，由于我没有学过原生小程序的写法，开发框架选择了更新还算频繁的uni-app，美团的mpvue已经很久没更新了，所以就不考虑了。以下是在下使用uni-app过程遇到的坑点。在这里简单记录下\n\n<h1>遇到的问题</h1>\n\n<ol>\n<li>引入小程序ui组件库<br />\n在开发小程序具体功能之前，首先当然是选择一款ui库了，这样能节省很多时间，我选择了vant-weapp。vant-weapp是一款小程序组件库，在uni-app框架中使用时要注意点是： \n    1. 小程序组件必需放在wxcomponents目录里的。\n    2. 当需要在 vue 组件中使用小程序组件时，pages.json配置引入时不要在页面的style的usingComponents下引入，而是应该在globalStyle下usingComponents引入。如果在页面级usingComponents引入小程序组件来使用，嵌套的vue组件是不能用小程序组件的，而且没有任何报错。</li>\n</ol>\n\nexample:<br />\n<a href=\"https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png\" title=\"引入小程序组件的目录结构\"><img src=\"https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png\" alt=\"引入小程序组件的目录结构\" title=\"引入小程序组件的目录结构\" /></a>\n\n<pre><code class=\"language-json \">\"globalStyle\": {\n    \"usingComponents\": {\n        \"van-button\": \"/wxcomponents/vant-weapp/button/index\"\n    }\n}\n</code></pre>\n\n<ol start=\"2\">\n<li>uni不支持使用Vue.use注册Vue全局组件<br />\nuni不支持使用Vue.use注册Vue全局组件，解决办法是直接在main.js里使用全局注册。</li>\n<li>在组件定义标签上不能用v-show</li>\n</ol>\n\n<pre><code class=\"\">    // 在组件定义的标签上使用v-show没作用\n    &lt;my-component v-show=\"flag\"&gt;&lt;/my-component&gt;\n\n    // 在普通标签使用没有问题\n    &lt;div v-show=\"flag\"&gt;条件编译v-show&lt;/div&gt;\n</code></pre>\n\n解决办法： 使用v-if替换v-show。需要注意v-if与v-show的区别', '[填坑] 使用uni-app开发小程序踩坑，持续更新中~', '', 'inherit', 'closed', 'closed', '', '117-revision-v1', '', '', '2020-01-03 07:14:55', '2020-01-03 07:14:55', '# 前言\r\n最近计划和小伙伴们开发一款小程序，工期一个月，由于我没有学过原生小程序的写法，开发框架选择了更新还算频繁的uni-app，美团的mpvue已经很久没更新了，所以就不考虑了。以下是在下使用uni-app过程遇到的坑点。在这里简单记录下\r\n\r\n# 遇到的问题\r\n1. 引入小程序ui组件库  \r\n在开发小程序具体功能之前，首先当然是选择一款ui库了，这样能节省很多时间，我选择了vant-weapp。vant-weapp是一款小程序组件库，在uni-app框架中使用时要注意点是： \r\n		1. 小程序组件必需放在wxcomponents目录里的。\r\n		2. 当需要在 vue 组件中使用小程序组件时，pages.json配置引入时不要在页面的style的usingComponents下引入，而是应该在globalStyle下usingComponents引入。如果在页面级usingComponents引入小程序组件来使用，嵌套的vue组件是不能用小程序组件的，而且没有任何报错。\r\n\r\nexample:  \r\n[![引入小程序组件的目录结构](https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png \"引入小程序组件的目录结构\")](https://i.loli.net/2019/12/24/svgkz6H9L2Tqd1N.png \"引入小程序组件的目录结构\")\r\n``` json\r\n&quot;globalStyle&quot;: {\r\n	&quot;usingComponents&quot;: {\r\n		&quot;van-button&quot;: &quot;/wxcomponents/vant-weapp/button/index&quot;\r\n	}\r\n}\r\n```\r\n2. uni不支持使用Vue.use注册Vue全局组件  \r\nuni不支持使用Vue.use注册Vue全局组件，解决办法是直接在main.js里使用全局注册。\r\n3. 在组件定义标签上不能用v-show\r\n```\r\n	// 在组件定义的标签上使用v-show没作用\r\n	&lt;my-component v-show=&quot;flag&quot;&gt;&lt;/my-component&gt;\r\n	\r\n	// 在普通标签使用没有问题\r\n	&lt;div v-show=&quot;flag&quot;&gt;条件编译v-show&lt;/div&gt;\r\n```\r\n解决办法： 使用v-if替换v-show。需要注意v-if与v-show的区别', 117, 'https://www.chwech.com/2020/01/03/117-revision-v1/', 0, 'revision', '', 0);
-INSERT INTO `wp_posts` VALUES (126, 1, '2020-02-21 14:16:08', '2020-02-21 14:16:08', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n  2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'publish', 'open', 'open', '', '%e8%ae%b0%e6%b8%85%e9%99%a4kdevtmpfsi%e6%8c%96%e7%9f%bf%e7%a8%8b%e5%ba%8f%e7%9a%84%e8%bf%87%e7%a8%8b', '', '', '2020-02-24 02:14:14', '2020-02-24 02:14:14', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\r\n> 2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。', 0, 'https://www.chwech.com/?p=126', 0, 'post', '', 0);
+INSERT INTO `wp_posts` VALUES (126, 1, '2020-02-21 14:16:08', '2020-02-21 14:16:08', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n  2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'draft', 'open', 'open', '', '%e8%ae%b0%e6%b8%85%e9%99%a4kdevtmpfsi%e6%8c%96%e7%9f%bf%e7%a8%8b%e5%ba%8f%e7%9a%84%e8%bf%87%e7%a8%8b', '', '', '2021-02-20 17:54:32', '2021-02-20 09:54:32', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\r\n> 2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。', 0, 'https://www.chwech.com/?p=126', 0, 'post', '', 0);
 INSERT INTO `wp_posts` VALUES (127, 1, '2020-02-21 14:09:13', '2020-02-21 14:09:13', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有</li>\n</ol>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-21 14:09:13', '2020-02-21 14:09:13', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有', 126, 'https://www.chwech.com/2020/02/21/126-revision-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (128, 1, '2020-02-21 14:16:08', '2020-02-21 14:16:08', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li><p>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-21 14:16:08', '2020-02-21 14:16:08', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。', 126, 'https://www.chwech.com/2020/02/21/126-revision-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (129, 1, '2020-02-24 02:12:34', '2020-02-24 02:12:34', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n  2020年2月24日10:11:51更新： 晕，原来是有个dockder容器带木马。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-autosave-v1', '', '', '2020-02-24 02:12:34', '2020-02-24 02:12:34', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\n```\nfind / -name kdevtmpfsi\nfind / -name kinsing\n```\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n2. 排除是否有可疑定时任务\n```crontab -l```\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\n\n3. 把kdevtmpfsi和kinsing进程kill掉。\n```\nps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n```\n\n4. 怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\n\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n> 2020年2月24日10:11:51更新： 晕，原来是有个dockder容器带木马。', 126, 'https://www.chwech.com/2020/02/22/126-autosave-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (130, 1, '2020-02-22 03:00:59', '2020-02-22 03:00:59', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-22 03:00:59', '2020-02-22 03:00:59', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。', 126, 'https://www.chwech.com/2020/02/22/126-revision-v1/', 0, 'revision', '', 0);
 INSERT INTO `wp_posts` VALUES (131, 1, '2020-02-24 02:14:14', '2020-02-24 02:14:14', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\n\n<ol>\n<li>通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing</li>\n</ol>\n\n<pre><code class=\"\">find / -name kdevtmpfsi\nfind / -name kinsing\n</code></pre>\n\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\n\n<ol start=\"2\">\n<li>排除是否有可疑定时任务\n<code>crontab -l</code>\n以上命令可查看本用户的定时任务。还可以直接进入<em>/var/spool/cron</em> 查看所有用户的定时任务。有不是自己定义的话都删除掉。</p></li>\n<li><p>把kdevtmpfsi和kinsing进程kill掉。</p></li>\n</ol>\n\n<pre><code class=\"\">ps aux | grep kdevtmpfsi\nps aux | grep kinsing\nkill -9 进程id\n</code></pre>\n\n<ol start=\"4\">\n<li>怎么中的招\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。</li>\n</ol>\n\n<blockquote>\n  <p>2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\n  2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。\n</blockquote>', '记清除kdevtmpfsi挖矿程序的过程', '', 'inherit', 'closed', 'closed', '', '126-revision-v1', '', '', '2020-02-24 02:14:14', '2020-02-24 02:14:14', '其实从我的博客诞生不久，博客所在的服务器的cpu不知什么时候开始，常年使用率达到了100%。由于我是一名前端，对linux操作系统仅了解基本命令的使用。所以就一直没管它，任由它负载运行。今天我又闲来没事，使用xshell登录服务器折腾，无意中使用top命令，发现在一个可疑进程kdevtmpfsi，cpu占用非常高，达98%以上。在百度上一搜，好家伙，原来是挖矿程序！服务器运行了近一年，帮别人挖了不和矿吧。于是我开始着手把它删掉。\r\n\r\n1. 通过find命令查找kdevtmpfsi文件和它的守护进程文件kinsing\r\n```\r\nfind / -name kdevtmpfsi\r\nfind / -name kinsing\r\n```\r\n找到后，通通删掉。守护进程会不断的重启挖矿程序，所以这个很关键。\r\n\r\n2. 排除是否有可疑定时任务\r\n```crontab -l```\r\n以上命令可查看本用户的定时任务。还可以直接进入*/var/spool/cron* 查看所有用户的定时任务。有不是自己定义的话都删除掉。\r\n\r\n3. 把kdevtmpfsi和kinsing进程kill掉。\r\n```\r\nps aux | grep kdevtmpfsi\r\nps aux | grep kinsing\r\nkill -9 进程id\r\n```\r\n\r\n4. 怎么中的招\r\n现在还不知道是怎么被植入挖矿程序的。通过前面3点操作，现在cpu终于降下来啦，开心。博客的访问速度也提升了一点。后续观察是否还会继续重启。\r\n\r\n> 2020年2月22日10:59:52更新： 一夜过去了，反弹了。并没有解决问题。\r\n> 2020年2月24日10:11:51更新： 晕，原来是有个lanp环境dockder容器带木马。把它停掉后，世界安静了。看来软件镜像还是得用官方的才行。', 126, 'https://www.chwech.com/2020/02/24/126-revision-v1/', 0, 'revision', '', 0);
-INSERT INTO `wp_posts` VALUES (148, 1, '2021-01-12 17:31:32', '2021-01-12 09:31:32', '21111111', '65', '', 'draft', 'open', 'open', '', 'testtest', '', '', '2021-01-12 17:43:22', '2021-01-12 09:43:22', '', 0, '', 0, 'post', '', 0);
-INSERT INTO `wp_posts` VALUES (151, 1, '2021-01-20 22:12:07', '2021-01-20 14:12:07', '2', '1', '1', 'draft', 'open', 'open', '', 'testtest', '', '', '2021-01-20 22:12:07', '2021-01-20 14:12:07', '', 0, '', 0, 'post', '', 0);
 
 -- ----------------------------
 -- Table structure for wp_term_relationships
@@ -618,7 +616,6 @@ CREATE TABLE `wp_term_relationships`  (
 -- Records of wp_term_relationships
 -- ----------------------------
 INSERT INTO `wp_term_relationships` VALUES (1, 1, 0);
-INSERT INTO `wp_term_relationships` VALUES (5, 2, 0);
 INSERT INTO `wp_term_relationships` VALUES (5, 3, 0);
 INSERT INTO `wp_term_relationships` VALUES (12, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (18, 1, 0);
@@ -630,7 +627,6 @@ INSERT INTO `wp_term_relationships` VALUES (35, 6, 0);
 INSERT INTO `wp_term_relationships` VALUES (37, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (50, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (58, 1, 0);
-INSERT INTO `wp_term_relationships` VALUES (72, 7, 0);
 INSERT INTO `wp_term_relationships` VALUES (90, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (92, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (96, 1, 0);
@@ -639,10 +635,6 @@ INSERT INTO `wp_term_relationships` VALUES (110, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (113, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (117, 1, 0);
 INSERT INTO `wp_term_relationships` VALUES (126, 1, 0);
-INSERT INTO `wp_term_relationships` VALUES (148, 22, 0);
-INSERT INTO `wp_term_relationships` VALUES (151, 20, 0);
-INSERT INTO `wp_term_relationships` VALUES (151, 22, 0);
-INSERT INTO `wp_term_relationships` VALUES (151, 24, 0);
 
 -- ----------------------------
 -- Table structure for wp_term_taxonomy
@@ -658,21 +650,26 @@ CREATE TABLE `wp_term_taxonomy`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
   PRIMARY KEY (`term_taxonomy_id`) USING BTREE,
   UNIQUE INDEX `typename`(`taxonomy`, `name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_term_taxonomy
 -- ----------------------------
-INSERT INTO `wp_term_taxonomy` VALUES (1, 1, 'category', '', 0, 11, 'Uncategorized');
-INSERT INTO `wp_term_taxonomy` VALUES (2, 2, 'category', '', 0, 1, 'markdown');
+INSERT INTO `wp_term_taxonomy` VALUES (1, 1, 'category', '123', 0, 11, 'Uncategorized');
 INSERT INTO `wp_term_taxonomy` VALUES (3, 3, 'post_tag', '', 0, 1, 'markdown');
 INSERT INTO `wp_term_taxonomy` VALUES (4, 4, 'category', '', 0, 1, 'vue');
 INSERT INTO `wp_term_taxonomy` VALUES (5, 5, 'post_tag', '', 0, 1, 'vue');
 INSERT INTO `wp_term_taxonomy` VALUES (6, 6, 'post_tag', '', 0, 1, 'vue-router');
-INSERT INTO `wp_term_taxonomy` VALUES (7, 7, 'category', '', 0, 1, 'JavaScript');
-INSERT INTO `wp_term_taxonomy` VALUES (20, 17, 'category', '4563212', 0, 1, '11122');
-INSERT INTO `wp_term_taxonomy` VALUES (22, 18, 'category', '222', 0, 3, 'tet111');
-INSERT INTO `wp_term_taxonomy` VALUES (24, 18, 'category', '222', 0, 1, 'cc');
+INSERT INTO `wp_term_taxonomy` VALUES (20, 17, 'category', '4563212', 0, 0, '11122');
+INSERT INTO `wp_term_taxonomy` VALUES (22, 18, 'category', '222', 0, 1, 'tet111');
+INSERT INTO `wp_term_taxonomy` VALUES (24, 18, 'category', '222', 0, 0, 'cc');
+INSERT INTO `wp_term_taxonomy` VALUES (25, 18, 'category', '2-2', 24, 0, 'child1');
+INSERT INTO `wp_term_taxonomy` VALUES (26, 18, 'category', '333555', 24, 0, 'child2');
+INSERT INTO `wp_term_taxonomy` VALUES (27, 18, 'category', '4466', 26, 0, 'child-child1');
+INSERT INTO `wp_term_taxonomy` VALUES (28, 7, 'category', '7777', 7, 0, 'other-child');
+INSERT INTO `wp_term_taxonomy` VALUES (29, 19, 'category', '新增分类', 1, 0, '新增');
+INSERT INTO `wp_term_taxonomy` VALUES (30, 19, 'category', '编辑新增', 20, 0, '编辑新增');
+INSERT INTO `wp_term_taxonomy` VALUES (31, 20, 'category', '123', 4, 0, '123');
 
 -- ----------------------------
 -- Table structure for wp_termmeta
@@ -686,12 +683,14 @@ CREATE TABLE `wp_termmeta`  (
   PRIMARY KEY (`meta_id`) USING BTREE,
   INDEX `term_id`(`term_id`) USING BTREE,
   INDEX `meta_key`(`meta_key`(191)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_termmeta
 -- ----------------------------
 INSERT INTO `wp_termmeta` VALUES (13, 21, 'img', '1');
+INSERT INTO `wp_termmeta` VALUES (14, 31, 'img', 'blog-admin/upload/wx8c45f50305031519.o6zAJszvV5JkiGpjJ4ecmsf8AfL4.UgGfGxdsjJ0j888db984ca27fd09727c69c16ad7c8ad.jpg');
+INSERT INTO `wp_termmeta` VALUES (15, 1, 'img', 'blog-admin/upload/wx8c45f50305031519.o6zAJszvV5JkiGpjJ4ecmsf8AfL4.UgGfGxdsjJ0j888db984ca27fd09727c69c16ad7c8ad.jpg');
 
 -- ----------------------------
 -- Table structure for wp_terms
@@ -705,7 +704,7 @@ CREATE TABLE `wp_terms`  (
   PRIMARY KEY (`term_id`) USING BTREE,
   UNIQUE INDEX `slug`(`slug`(191)) USING BTREE,
   INDEX `name`(`name`(191)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_520_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of wp_terms
@@ -718,6 +717,8 @@ INSERT INTO `wp_terms` VALUES (7, 'JavaScript', 'javascript', 0);
 INSERT INTO `wp_terms` VALUES (14, 'vue3', 'vue3', 0);
 INSERT INTO `wp_terms` VALUES (17, 'cccccc', 'cccccc', 0);
 INSERT INTO `wp_terms` VALUES (18, 'tet111', 'tet111', 0);
+INSERT INTO `wp_terms` VALUES (19, 'add', 'add', 0);
+INSERT INTO `wp_terms` VALUES (20, '123', '123', 0);
 
 -- ----------------------------
 -- Table structure for wp_usermeta
@@ -899,6 +900,75 @@ SELECT GROUP_CONCAT(wp_term_taxonomy.term_taxonomy_id) INTO result
 	ON 
 		wp_term_taxonomy.term_id = wp_terms.term_id AND wp_terms.slug = f_slug;
 return result;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for getFilterPost
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `getFilterPost`;
+delimiter ;;
+CREATE PROCEDURE `getFilterPost`(IN currentPage int, pageSize int, categoryId int, isTrash int)
+BEGIN
+ declare offsetNum INT;
+ set offsetNum = (currentPage - 1) * pageSize;
+ DROP TEMPORARY TABLE IF EXISTS tmp_table;
+ IF isTrash = 0 THEN
+  CREATE TEMPORARY TABLE tmp_table SELECT wp.*, wp_users.user_nicename as author, GROUP_CONCAT(wp_c.name) as category_name, GROUP_CONCAT(wp_c.term_taxonomy_id) as category_id
+      FROM 
+        wp_posts wp
+      LEFT JOIN
+        wp_users
+      ON
+        wp.post_author = wp_users.ID
+      LEFT JOIN
+        wp_term_relationships wp_r
+      ON
+        wp.ID = wp_r.object_id
+      LEFT JOIN
+        wp_term_taxonomy wp_c
+      ON 
+        wp_r.term_taxonomy_id = wp_c.term_taxonomy_id
+      WHERE
+        wp.post_status = 'publish' OR wp.post_status = 'draft'
+      GROUP BY wp.ID
+			ORDER BY wp.post_modified DESC;
+	IF categoryId = 0 THEN
+	SELECT * FROM tmp_table LIMIT pageSize OFFSET offsetNum;
+	SELECT count(*) as total FROM tmp_table ;
+	ELSE 
+	 SELECT * FROM tmp_table WHERE FIND_IN_SET(categoryId,category_id) LIMIT pageSize OFFSET offsetNum;
+	 SELECT count(*) as total FROM tmp_table WHERE FIND_IN_SET(categoryId,category_id);
+	END IF;
+ELSE 
+	CREATE TEMPORARY TABLE tmp_table SELECT wp.*, wp_users.user_nicename as author, GROUP_CONCAT(wp_c.name) as category_name, GROUP_CONCAT(wp_c. term_taxonomy_id) as category_id
+      FROM 
+        wp_posts wp
+      LEFT JOIN
+        wp_users
+      ON
+        wp.post_author = wp_users.ID
+      LEFT JOIN
+        wp_term_relationships wp_r
+      ON
+        wp.ID = wp_r.object_id
+      LEFT JOIN
+        wp_term_taxonomy wp_c
+      ON 
+        wp_r.term_taxonomy_id = wp_c.term_taxonomy_id
+      WHERE
+        wp.post_status = 'trash'
+      GROUP BY wp.ID
+			ORDER BY wp.post_modified DESC;
+	IF categoryId = 0 THEN
+	SELECT * FROM tmp_table LIMIT pageSize OFFSET offsetNum;
+	SELECT count(*) as total FROM tmp_table ;
+	ELSE 
+	 SELECT * FROM tmp_table WHERE FIND_IN_SET(categoryId,category_id) LIMIT pageSize OFFSET offsetNum;
+	 SELECT count(*) as total FROM tmp_table WHERE FIND_IN_SET(categoryId,category_id);
+	END IF;
+END IF;
 END
 ;;
 delimiter ;
