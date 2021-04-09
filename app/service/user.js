@@ -10,7 +10,11 @@ class UserService extends Service {
     return user
   }
 
+  async revokedToken(token) {
+    const affectRow = await this.app.mysql.insert('wp_tokens', { 'token': token })
 
+    return affectRow
+  }
 }
 
 module.exports = UserService
