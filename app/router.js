@@ -47,4 +47,7 @@ module.exports = app => {
 
   // 错误收集
   app.router.post('/collect_error', app.controller.error.collect)
+
+  // 日志
+  app.router.post('/log', app.controller.log.saveLog)
 }
