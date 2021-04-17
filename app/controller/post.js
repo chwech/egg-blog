@@ -28,7 +28,28 @@ class PostController extends Controller {
       }
     )
   }
+  async bypostname() {
+    const ctx = this.ctx
+    const body = ctx.request.query
 
+    // 参数校验
+    ctx.validate({
+      postName: { type: 'string', required: true },
+    }, ctx.request.query)
+
+    ctx.logger.info('请求文章列表')
+    const posts = await ctx.service.post.getListByPostName(body)
+
+    // const [{ total }] = await ctx.service.post.getCount()
+
+    this.success(
+      {
+        items: posts,
+
+        // total: total
+      }
+    )
+  }
   async add() {
     const ctx = this.ctx
     const body = ctx.request.body

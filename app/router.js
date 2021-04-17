@@ -26,10 +26,11 @@ module.exports = app => {
   app.router.post('/post/update', app.controller.post.update)
   app.router.post('/post/trash', app.controller.post.trash)
   app.router.post('/post/delete', app.controller.post.delete)
+  app.router.get('/post/bypostname', app.controller.post.bypostname)
 
 
   // 分类管理
-  app.router.resources('category', '/category', app.jwt, app.controller.category)
+  app.router.resources('category', '/category', app.controller.category)
   app.router.post('/category/update', app.controller.category.update)
   app.router.post('/category/delete', app.controller.category.destroy)
   app.router.post('/category/getpost', app.controller.category.getpost)

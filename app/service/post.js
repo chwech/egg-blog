@@ -271,6 +271,21 @@ class PostService extends Service {
       }
     }
   }
+  async getListByPostName(data) {
+    try {
+      const post = await this.app.mysql.query(`select * from wp_posts WHERE post_name = '${encodeURI(data.postName)}' and post_status = 'publish';`)
+
+      return {
+        statu: true,
+        data: post
+      }
+    } catch(err) {
+      return {
+        statu: false,
+        data: err
+      }
+    }
+  }
 }
 
 module.exports = PostService
